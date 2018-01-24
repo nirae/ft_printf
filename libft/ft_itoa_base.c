@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 08:23:34 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/01/23 16:17:05 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/01/24 08:11:06 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,4 @@ char		*ft_itoa_base(int n, int base)
 	if (isneg)
 		result[i] = '-';
 	return (ft_strrev(result));
-}
-
-int		main(void)
-{
-	ft_putendl(ft_itoa_base(13, 16));
-	return (0);
 }
