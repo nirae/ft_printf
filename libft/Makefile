@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 09:16:22 by ndubouil          #+#    #+#              #
-#    Updated: 2017/12/13 19:18:48 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/01/24 08:11:28 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,8 @@ SRC		=	ft_putchar.c		\
 	  	ft_lstaddend.c			\
 	  	ft_lstlen.c				\
 	  	ft_sqrt.c				\
-	  	ft_lsti.c
+	  	ft_lsti.c				\
+		ft_itoa_base.c
 OBJ		=	$(patsubst %.c,%.o,$(SRC))
 HFILES	=	$(HEADER)/libft.h
 # Name
