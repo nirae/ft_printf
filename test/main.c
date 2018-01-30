@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/01/24 14:53:30 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/01/30 16:42:53 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		main(int argc, char **argv)
 	//ft_putnbr(i);
 	//ft_printf("binaire : %b\n", 50);
 	//ft_printf("le mien : %o\n", 50);
-	printf("le vrai : %-d\n", 50);
+	ft_printf("%+", "hello");
+	//ft_printf("%", 50);
 
 	
 
