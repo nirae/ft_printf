@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/01/30 16:42:58 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/01/31 21:41:18 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 
 void	print_tflags(t_env *env)
 {
+	/*
+	printf("alignement : %d\n", flags->align);	
+	printf("signe : %d\n", flags->sign);
+	printf("zero : %d\n", flags->zero);
+	printf("espace : %d\n", flags->space);
+	printf("hash : %d\n", flags->hash);
+	*/
 	printf("alignement : %d\n", env->flags.align);	
 	printf("signe : %d\n", env->flags.sign);
 	printf("zero : %d\n", env->flags.zero);
@@ -34,10 +41,37 @@ int		is_valid_flags(char c)
 
 int		set_flags(char *str, t_env **env)
 {
+	/*printf("%c\n", str[(*env)->pos]);
+	(*flags)->align = (str[(*env)->pos] == '-') ? LEFT : RIGHT;
+	//(*flags)->sign = (str[(*env)->pos] == '+') ? TRUE : FALSE;
+	if (str[(*env)->pos] == '+')
+	{
+		(*flags)->sign = TRUE;
+		(*flags)->space = FALSE;
+	}
+	(*flags)->zero = (str[(*env)->pos] == '0' && !(*flags)->align) ? TRUE : FALSE;
+	//(*flags)->space = (str[(*env)->pos] == ' ' && !(*flags)->sign) ? TRUE : FALSE;
+	if (str[(*env)->pos] == ' ' && !(*flags)->sign)
+		(*flags)->space = TRUE;
+	(*flags)->hash = (str[(*env)->pos] == '#') ? TRUE : FALSE;
+	if (!is_valid_flags(str[(*env)->pos]))
+		return (0);
+	(*env)->pos += 1;
+	return (set_flags(str, env, flags));*/
+	printf("%c\n", str[(*env)->pos]);
 	(*env)->flags.align = (str[(*env)->pos] == '-') ? LEFT : RIGHT;
-	(*env)->flags.sign = (str[(*env)->pos] == '+') ? TRUE : FALSE;
+	//(*env)->flags.sign = (str[(*env)->pos] == '+') ? TRUE : FALSE;
+	if (str[(*env)->pos] == '+')
+	{
+		(*env)->flags.sign = TRUE;
+		(*env)->flags.space = FALSE;
+	}
 	(*env)->flags.zero = (str[(*env)->pos] == '0' && !(*env)->flags.align) ? TRUE : FALSE;
-	(*env)->flags.space = (str[(*env)->pos] == ' ' && !(*env)->flags.sign) ? TRUE : FALSE;
+	//(*env)->flags.space = (str[(*env)->pos] == ' ' && !(*env)->flags.sign) ? TRUE : FALSE;
+	if (str[(*env)->pos] == ' ' && !(*env)->flags.sign)
+		(*env)->flags.space = TRUE;
+	else
+		(*env)->flags.space = FALSE;
 	(*env)->flags.hash = (str[(*env)->pos] == '#') ? TRUE : FALSE;
 	if (!is_valid_flags(str[(*env)->pos]))
 		return (0);
@@ -119,7 +153,7 @@ int		ft_printf(const char *str, ...)
 			env.len++;
 			continue;
 		}
-		env.pos += 1;
+		env.pos++;
 		parser(string, &env);
 		print_tflags(&env);
 		//if (is_valid_type(string[env.pos]))
