@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/01/31 13:55:10 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/01 20:02:47 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct		s_flags
 	int				zero;
 	int				space;
 	int				hash;
-	int				width;
-	int				precision;
+	long long int	width;
+	long long int	precision;
 	char			type;
 }					t_flags;
 

@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/01/31 21:41:18 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/01 20:02:49 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,13 @@
 
 void	print_tflags(t_env *env)
 {
-	/*
-	printf("alignement : %d\n", flags->align);	
-	printf("signe : %d\n", flags->sign);
-	printf("zero : %d\n", flags->zero);
-	printf("espace : %d\n", flags->space);
-	printf("hash : %d\n", flags->hash);
-	*/
 	printf("alignement : %d\n", env->flags.align);	
 	printf("signe : %d\n", env->flags.sign);
 	printf("zero : %d\n", env->flags.zero);
 	printf("espace : %d\n", env->flags.space);
 	printf("hash : %d\n", env->flags.hash);
+	printf("width : %lld\n", env->flags.width);
+	printf("precision : %d\n", env->flags.precision);
 }
 ///////////////////////////////////////////////////////////
 
@@ -39,44 +34,93 @@ int		is_valid_flags(char c)
 	return (0);
 }
 
+// Initialise tous les flags par defaut
+void	init_all_flags(t_env **env)
+{
+	// flags
+	(*env)->flags.align = RIGHT;
+	(*env)->flags.sign = FALSE;
+	(*env)->flags.zero = FALSE;
+	(*env)->flags.space = FALSE;
+	(*env)->flags.hash = FALSE;
+	// width
+	(*env)->flags.width = 0;
+	// precision
+	(*env)->flags.precision = 0;
+}
+
+// Rempli les flags
 int		set_flags(char *str, t_env **env)
 {
-	/*printf("%c\n", str[(*env)->pos]);
-	(*flags)->align = (str[(*env)->pos] == '-') ? LEFT : RIGHT;
-	//(*flags)->sign = (str[(*env)->pos] == '+') ? TRUE : FALSE;
-	if (str[(*env)->pos] == '+')
-	{
-		(*flags)->sign = TRUE;
-		(*flags)->space = FALSE;
-	}
-	(*flags)->zero = (str[(*env)->pos] == '0' && !(*flags)->align) ? TRUE : FALSE;
-	//(*flags)->space = (str[(*env)->pos] == ' ' && !(*flags)->sign) ? TRUE : FALSE;
-	if (str[(*env)->pos] == ' ' && !(*flags)->sign)
-		(*flags)->space = TRUE;
-	(*flags)->hash = (str[(*env)->pos] == '#') ? TRUE : FALSE;
+	// Point de sortie -> Si le flag est invalide
 	if (!is_valid_flags(str[(*env)->pos]))
 		return (0);
-	(*env)->pos += 1;
-	return (set_flags(str, env, flags));*/
-	printf("%c\n", str[(*env)->pos]);
-	(*env)->flags.align = (str[(*env)->pos] == '-') ? LEFT : RIGHT;
-	//(*env)->flags.sign = (str[(*env)->pos] == '+') ? TRUE : FALSE;
+	// DEBUG
+	printf("flag : %c\n", str[(*env)->pos]);
+	// GESTION des flags
+	if (str[(*env)->pos] == '-')
+	{
+		(*env)->flags.align = LEFT;
+		(*env)->flags.zero = FALSE;
+	}
 	if (str[(*env)->pos] == '+')
 	{
 		(*env)->flags.sign = TRUE;
 		(*env)->flags.space = FALSE;
 	}
-	(*env)->flags.zero = (str[(*env)->pos] == '0' && !(*env)->flags.align) ? TRUE : FALSE;
-	//(*env)->flags.space = (str[(*env)->pos] == ' ' && !(*env)->flags.sign) ? TRUE : FALSE;
+	if (str[(*env)->pos] == '0' && (*env)->flags.align != LEFT)
+		(*env)->flags.zero = TRUE;
 	if (str[(*env)->pos] == ' ' && !(*env)->flags.sign)
 		(*env)->flags.space = TRUE;
-	else
-		(*env)->flags.space = FALSE;
 	(*env)->flags.hash = (str[(*env)->pos] == '#') ? TRUE : FALSE;
-	if (!is_valid_flags(str[(*env)->pos]))
-		return (0);
-	(*env)->pos += 1;
+	// Flag suivant
+	(*env)->pos++;
+	// Recursif
 	return (set_flags(str, env));
+}
+
+// Rempli la largeur
+int		set_width(char *str, t_env **env)
+{
+	long long int		i;
+
+	i = 0;
+	// micro-atoi
+	while (ft_isdigit(str[(*env)->pos]))
+	{
+		i = (str[(*env)->pos] - '0' + i * 10);
+		(*env)->pos++;
+	}
+	if (str[(*env)->pos] == '*')
+	{
+		i = va_arg((*env)->va, int);
+		(*env)->pos++;
+	}
+	(*env)->flags.width = i;
+	return (0);
+}
+
+int		set_precision(char *str, t_env **env)
+{
+	int		i;
+
+	i = 0;
+	if (str[(*env)->pos] != '.')
+		return (0);
+	(*env)->pos++;
+	// micro-atoi
+	while (ft_isdigit(str[(*env)->pos]))
+	{
+		i = (str[(*env)->pos] - '0' + i * 10);
+		(*env)->pos++;
+	}
+	if (str[(*env)->pos] == '*')
+	{
+		i = va_arg((*env)->va, int);
+		(*env)->pos++;
+	}
+	(*env)->flags.precision = i;
+	return (0);
 }
 
 int		is_valid_type(char c)
@@ -90,7 +134,10 @@ int		is_valid_type(char c)
 void	parser(char *str, t_env *env)
 {
 	//if (is_valid_flags(str[env->pos]))
+	init_all_flags(&env);
 	set_flags(str, &env);
+	set_width(str, &env);
+	set_precision(str, &env);
 }
 
 void	print_types(char c, t_env *env)
