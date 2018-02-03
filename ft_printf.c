@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/01 20:02:49 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/03 23:06:11 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_tflags(t_env *env)
 	printf("espace : %d\n", env->flags.space);
 	printf("hash : %d\n", env->flags.hash);
 	printf("width : %lld\n", env->flags.width);
-	printf("precision : %d\n", env->flags.precision);
+	printf("precision : %lld\n", env->flags.precision);
 }
 ///////////////////////////////////////////////////////////
 
@@ -47,6 +47,7 @@ void	init_all_flags(t_env **env)
 	(*env)->flags.width = 0;
 	// precision
 	(*env)->flags.precision = 0;
+	(*env)->size = FALSE;
 }
 
 // Rempli les flags

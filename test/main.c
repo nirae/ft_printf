@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/01 12:37:43 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:11:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main()
 	//ft_printf("binaire : %b\n", 50);
 	//ft_printf("le mien : %o\n", 50);
 	//ft_printf("%-0");
-	ft_printf("%+-a.150", 50);
+	ft_printf("%%");
 	//ft_printf("%", 50);
 	
 	return (0);

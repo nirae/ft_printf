@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/01 20:02:47 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:49:17 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 
 # define RIGHT 2
 # define LEFT 3
+
+# define H 4
+# define HH 5
+# define L 6
+# define LL 7
+# define J 8
+# define Z 9
 
 typedef union		u_types
 {
@@ -39,6 +46,7 @@ typedef struct		s_flags
 	int				hash;
 	long long int	width;
 	long long int	precision;
+	int				size;
 	char			type;
 }					t_flags;
 
