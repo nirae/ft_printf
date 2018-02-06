@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/03 16:49:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/06 11:56:30 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,34 @@
 # include "./libft/libft.h"
 # include <stdarg.h>
 
-# define TRUE 1
-# define FALSE 0
+//# define TRUE 1
+//# define FALSE 0
 
 # define RIGHT 2
 # define LEFT 3
 
-# define H 4
-# define HH 5
-# define L 6
-# define LL 7
-# define J 8
-# define Z 9
+//# define H 4
+//# define HH 5
+//# define L 6
+//# define LL 7
+//# define J 8
+//# define Z 9
+
+typedef enum		e_bool
+{
+	FALSE,
+	TRUE
+}					t_bool;
+
+typedef enum		e_size
+{
+	H = 4,
+	HH,
+	L,
+	LL,
+	J,
+	Z
+}					t_size;
 
 typedef union		u_types
 {
