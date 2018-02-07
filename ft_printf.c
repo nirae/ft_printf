@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/06 20:53:38 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/07 17:19:44 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		set_flags(char *str, t_env **env)
 	if (!is_valid_flags(str[(*env)->pos]))
 		return (0);
 	// DEBUG
-	printf("flag : %c\n", str[(*env)->pos]);
+	//printf("flag : %c\n", str[(*env)->pos]);
 	// GESTION des flags
 	if (str[(*env)->pos] == '-')
 	{
@@ -192,11 +192,43 @@ int		parser(char *str, t_env *env)
 	return (TRUE);
 }
 
-/*int		printer(t_env *env)
+int		print_char(t_env **env)
 {
-	
+	long long int		i;
+	char				arg;
+	char				*result;
+
+	i = -1;
+	arg = (char)va_arg((*env)->va, int);
+	if ((*env)->flags.width)
+	{
+		if (!(result = ft_strnew((*env)->flags.width)))
+			return (FALSE);
+		if ((*env)->flags.align == RIGHT)
+			while (++i < (*env)->flags.width - 1)
+				result[i] = ' ';
+		result[i] = arg;
+		if ((*env)->flags.align == LEFT)
+			while (++i < (*env)->flags.width - 1)
+				result[i] = ' ';
+		ft_putstr(result);
+		ft_strdel(&result);
+		return (TRUE);
+	}
+	ft_putchar(arg);
+	return (TRUE);
+}
+
+int		printer(t_env *env)
+{
+	//if ((env->flags.type == 'c' && env->flags.size == 'l') ||
+	//	env->flags.type == 'C')
+	//	print_lchar(&env);
+	if (env->flags.type == 'c')
+		print_char(&env);
+
 	return (0);
-}*/
+}
 
 void	print_types(char c, t_env *env)
 {
@@ -263,9 +295,9 @@ int		ft_printf(const char *str, ...)
 		env.pos++;
 		if (!parser(string, &env))
 			return (FALSE);
-		//printer(&env);
 		// DEBUG
-		print_tflags(&env);
+		//print_tflags(&env);
+		printer(&env);
 		//if (is_valid_type(string[env.pos]))
 		//	print_types(string[env.pos], &env);
 	}
