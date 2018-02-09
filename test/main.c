@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/07 10:17:55 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/09 15:00:43 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int		main()
 	//ft_printf("le mien : %o\n", 50);
 	//ft_printf("%-0");
 	//ft_printf("%-11.34lll");
-	printf("%c\n", 'c');
-	ft_printf("%c\n", 'c');
+	printf("le vrai :\n");
+	printf("hello ca%----4c %1c va %10c%-c ??", '\0', '\n', (char)564, 0);
+	ft_printf("le mien :\n");
+	ft_printf("hello ca%----4c %1c va %10c%-c ??\n", '\0', '\n', (char)564, 0);
 	//ft_printf("%", 50);
 	
 	return (0);

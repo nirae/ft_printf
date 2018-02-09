@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/07 17:19:44 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/02/09 15:36:24 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		is_valid_sizeflag(char c)
 int		is_valid_type(char c)
 {
 	if (c == 's' || c == 'd' || c == 'i' || c == 'c' || c == 'p' ||
-		c == 'b' || c == 'o')
+		c == 'b' || c == 'o' || c == '%')
 		return (1);
 	return(0);
 }
@@ -198,24 +198,29 @@ int		print_char(t_env **env)
 	char				arg;
 	char				*result;
 
-	i = -1;
+	i = 0;
 	arg = (char)va_arg((*env)->va, int);
-	if ((*env)->flags.width)
+	if ((*env)->flags.width > 1)
 	{
+		// Protection Malloc
 		if (!(result = ft_strnew((*env)->flags.width)))
 			return (FALSE);
+		// Si pas de flag -
 		if ((*env)->flags.align == RIGHT)
-			while (++i < (*env)->flags.width - 1)
-				result[i] = ' ';
-		result[i] = arg;
+			while (i < (*env)->flags.width - 1)
+				result[i++] = ' ';
+		result[i++] = arg;
+		// Si flag -
 		if ((*env)->flags.align == LEFT)
-			while (++i < (*env)->flags.width - 1)
-				result[i] = ' ';
-		ft_putstr(result);
+			while (i < (*env)->flags.width)
+				result[i++] = ' ';
+		write(1, result, i);
+		(*env)->len += i;
 		ft_strdel(&result);
 		return (TRUE);
 	}
-	ft_putchar(arg);
+	write(1, &arg, 1);
+	(*env)->len++;
 	return (TRUE);
 }
 
