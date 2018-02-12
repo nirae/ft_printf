@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 08:41:35 by ndubouil          #+#    #+#              #
-#    Updated: 2018/01/17 12:26:18 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/02/12 14:13:18 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,22 @@ RM		=	/bin/rm
 CFLAGS	=	-Wall -Wextra -Werror
 # Directories
 LIB		=	./libft/
-HEADER	=	.
+H		=	./includes
+PA		=	./parser
+PR		=	./printer
 #  Files
-HFILES	=	$(HEADER)/libftprintf.h
-SRC		=	ft_printf.c
+HFILES	=	$(H)/libftprintf.h
+SRC		=	$(PA)/is_valid_flags.c		\
+			$(PA)/is_valid_sizeflag.c	\
+			$(PA)/is_valid_type.c		\
+			$(PA)/init_flags.c			\
+			$(PA)/set_flags.c			\
+			$(PA)/set_size.c			\
+			$(PA)/set_type.c			\
+			$(PA)/set_width.c			\
+			$(PA)/set_precision.c		\
+			$(PR)/print_char.c			\
+			ft_printf.c
 OBJ		=	$(patsubst %.c,%.o,$(SRC))
 # Name
 NAME	=	libftprintf.a
@@ -42,7 +54,7 @@ $(NAME):	$(OBJ) $(MAIN) $(HFILES) $(LIB) Makefile
 
 %.o: 		%.c
 		@echo "Creating $@ ..."
-		@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)
+		@$(CC) $(CFLAGS) -c $< -o $@ -I$(H)
 
 clean:
 		@echo "Cleaning Objs ..."
