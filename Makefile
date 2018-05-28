@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 08:41:35 by ndubouil          #+#    #+#              #
-#    Updated: 2018/02/12 14:13:18 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/05/29 00:01:53 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIB		=	./libft/
 H		=	./includes
 PA		=	./parser
 PR		=	./printer
+B		=	./buffer
 #  Files
 HFILES	=	$(H)/libftprintf.h
 SRC		=	$(PA)/is_valid_flags.c		\
@@ -33,6 +34,11 @@ SRC		=	$(PA)/is_valid_flags.c		\
 			$(PA)/set_width.c			\
 			$(PA)/set_precision.c		\
 			$(PR)/print_char.c			\
+			$(PR)/print_string.c		\
+			$(PR)/print_address.c		\
+			$(PR)/print_number.c		\
+			$(PR)/ft_ulli_itoa_base.c	\
+			$(B)/buffer.c				\
 			ft_printf.c
 OBJ		=	$(patsubst %.c,%.o,$(SRC))
 # Name

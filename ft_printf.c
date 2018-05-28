@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 14:13:15 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/29 00:04:05 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,36 +85,29 @@ void	print_tflags(t_env *env)
 
   }*/
 
-int		print_percent(t_env **env)
+int		print_percent(t_env *env)
 {
 	long long int		i;
-	char				*result;
 
-	i = 0;
-	U_C = '%';
-	if (F_WIDTH > 1)
+	i = -1;
+	env->types.c = '%';
+	if (env->flags.width > 1)
 	{
-		if (!(result = ft_strnew(F_WIDTH)))
-			return (FALSE);
-		if (F_ALIGN == RIGHT)
-			while (i < F_WIDTH - 1)
+		if (env->flags.align == RIGHT)
+			while (++i < env->flags.width - 1)
 			{
-				if (F_ZERO)
-					result[i++] = '0';
+				if (env->flags.zero)
+					env->len += putchar_in_buffer(&env->buff, '0');
 				else
-					result[i++] = ' ';
+					env->len += putchar_in_buffer(&env->buff, ' ');
 			}
-		result[i++] = U_C;
-		if (F_ALIGN == LEFT)
-			while (i < F_WIDTH)
-				result[i++] = ' ';
-		write(1, result, i);
-		LEN += i;
-		ft_strdel(&result);
+		env->len += putchar_in_buffer(&env->buff, env->types.c);
+		if (env->flags.align == LEFT)
+			while (++i < env->flags.width - 1)
+				env->len += putchar_in_buffer(&env->buff, ' ');
 		return (TRUE);
 	}
-	write(1, &U_C, 1);
-	LEN++;
+	env->len += putchar_in_buffer(&env->buff, env->types.c);
 	return (TRUE);
 }
 
@@ -136,11 +129,15 @@ int		printer(t_env *env)
 	//	env->flags.type == 'C')
 	//	print_lchar(&env);
 	if (env->flags.type == '%')
-		print_percent(&env);
+		print_percent(env);
 	if (env->flags.type == 'c')
-		print_char(&env);
-	//if (env->flags.type == 'd' || env->flags.type == 'i')
-	//	print_integer(&env);
+		print_char(env);
+	if (env->flags.type == 's')
+		print_string(env);
+	if (env->flags.type == 'p')
+		print_address(env);
+	if (env->flags.type == 'd' || env->flags.type == 'i')
+		print_number(env);
 	return (0);
 }
 
@@ -153,13 +150,13 @@ int		ft_printf(const char *str, ...)
 	string = (char *)str;
 	env.pos = 0;
 	env.len = 0;
+	env.buff.len = 0;
 	while (string[env.pos] != 0)
 	{
 		if (string[env.pos] != '%')
 		{
-			ft_putchar(string[env.pos]);
+			env.len += putchar_in_buffer(&env.buff, string[env.pos]);
 			env.pos++;
-			env.len++;
 			continue;
 		}
 		env.pos++;
@@ -172,5 +169,6 @@ int		ft_printf(const char *str, ...)
 		//	print_types(string[env.pos], &env);
 	}
 	va_end(env.va);
+	print_buffer(&env.buff);
 	return (env.len);
 }

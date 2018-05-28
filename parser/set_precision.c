@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:37:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 10:46:16 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/28 14:48:02 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int		set_precision(char *str, t_env **env)
 
 	i = 0;
 	if (str[POS] != '.')
+	{
+		F_PRECISION = -1;
 		return (FALSE);
+	}
 	POS++;
 	while (ft_isdigit(str[POS]))
 	{
@@ -35,6 +38,8 @@ int		set_precision(char *str, t_env **env)
 	if (str[POS] == '*')
 	{
 		i = va_arg((*env)->va, int);
+		if (i < 0)
+			i = -1;
 		POS++;
 	}
 	F_PRECISION = i;

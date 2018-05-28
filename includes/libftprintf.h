@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 11:48:52 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/29 00:02:50 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef union		u_types
 	int				i;
 	long int		li;
 	long long int	lli;
+	unsigned long long int ulli;
+	short int		si;
 }					t_types;
 
 typedef struct		s_flags
@@ -104,9 +106,18 @@ typedef struct		s_flags
 	char			type;
 }					t_flags;
 
+# define BUFFER_SIZE 4096
+
+typedef	struct		s_buffer
+{
+	int				len;
+	char			buff[BUFFER_SIZE];
+}					t_buffer;
+
 typedef struct		s_env
 {
 	t_types			types;
+	t_buffer		buff;
 	int				len;
 	int				pos;
 	va_list			va;
@@ -131,7 +142,19 @@ int					set_precision(char *str, t_env **env);
 ** Printing
 */
 
-int					print_char(t_env **env);
+int					print_char(t_env *env);
+int					print_string(t_env *env);
+int					print_address(t_env *env);
+int					print_number(t_env *env);
+/*
+** BUFFER
+*/
+
+int					putstr_in_buffer(t_buffer *buff, char *str);
+int					putchar_in_buffer(t_buffer *buff, char c);
+void				print_buffer(t_buffer *buff);
+
+char				*ft_lli_itoa_base(long long int n, int base);
 
 int					ft_printf(const char *str, ...);
 
