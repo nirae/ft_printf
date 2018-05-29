@@ -6,39 +6,47 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:14:51 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/29 00:03:12 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/29 16:27:44 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	ft_count(int n, int base)
+static int	ft_count(long long int n, int base)
 {
 	int		i;
 
-	i = 1;
-	while (n >= base)
+	i = 0;
+	while (n != 0)
 	{
 		n = n / base;
 		i++;
 	}
-	return (i - 1);
+	return (i);
 }
 
-char		*ft_lli_itoa_base(long long int n, int base)
+char		*ft_lli_itoa_base(long long int n, char *base_str)
 {
 	int		len;
-	int		i;
+	int		isneg;
+	int		base;
 	char	*result;
 
+	base = ft_strlen(base_str);
+	isneg = n < 0 ? 1 : 0;
 	len = ft_count(n, base);
-	if (!(result = ft_strnew(len + 1)))
-		return (0);
-	i = 0;
-	while (i <= len)
+	if (!(result = ft_strnew(len + isneg)))
+		return (NULL);
+	result[0] = isneg ? '-' : '0';
+	if (isneg)
+		len++;
+	while (n != 0)
 	{
-		result[i++] = (n % base) + (n % base > 9 ? 'a' - 10 : 48);
+		if (n < 0)
+			result[--len] = base_str[-1 * (n % base)];
+		else
+			result[--len] = base_str[n % base];
 		n = n / base;
 	}
-	return (ft_strrev(result));
+	return (result);
 }

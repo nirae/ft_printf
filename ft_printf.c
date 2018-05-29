@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/29 00:04:05 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/29 16:29:05 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,15 +130,17 @@ int		printer(t_env *env)
 	//	print_lchar(&env);
 	if (env->flags.type == '%')
 		print_percent(env);
-	if (env->flags.type == 'c')
+	else if (env->flags.type == 'c')
 		print_char(env);
-	if (env->flags.type == 's')
+	else if (env->flags.type == 's')
 		print_string(env);
-	if (env->flags.type == 'p')
+	else if (env->flags.type == 'p')
 		print_address(env);
-	if (env->flags.type == 'd' || env->flags.type == 'i')
+	else if (env->flags.type == 'd' || env->flags.type == 'i' || env->flags.type == 'D')
 		print_number(env);
-	return (0);
+	else
+		return (0);
+	return (1);
 }
 
 int		ft_printf(const char *str, ...)

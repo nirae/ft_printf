@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/29 00:02:50 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/29 14:22:09 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int					putstr_in_buffer(t_buffer *buff, char *str);
 int					putchar_in_buffer(t_buffer *buff, char c);
 void				print_buffer(t_buffer *buff);
 
-char				*ft_lli_itoa_base(long long int n, int base);
+char				*ft_lli_itoa_base(long long int n, char *base_str);
 
 int					ft_printf(const char *str, ...);
 
