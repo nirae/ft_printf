@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/29 16:29:05 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/30 19:17:04 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,10 @@ int		printer(t_env *env)
 		print_address(env);
 	else if (env->flags.type == 'd' || env->flags.type == 'i' || env->flags.type == 'D')
 		print_number(env);
+	else if (env->flags.type == 'u' || env->flags.type == 'U')
+		print_unsigned_number(env);
+	else if (env->flags.type == 'o' || env->flags.type == 'O')
+		print_octal(env);
 	else
 		return (0);
 	return (1);
@@ -165,7 +169,7 @@ int		ft_printf(const char *str, ...)
 		if (!parser(string, &env))
 			return (FAIL);
 		// DEBUG
-		//print_tflags(&env);
+		print_tflags(&env);
 		printer(&env);
 		//if (is_valid_type(string[env.pos]))
 		//	print_types(string[env.pos], &env);

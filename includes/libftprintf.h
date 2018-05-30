@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/29 14:22:09 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/30 18:35:33 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,9 @@ int					print_char(t_env *env);
 int					print_string(t_env *env);
 int					print_address(t_env *env);
 int					print_number(t_env *env);
+int					print_unsigned_number(t_env *env);
+int					print_octal(t_env *env);
+
 /*
 ** BUFFER
 */
@@ -155,6 +158,7 @@ int					putchar_in_buffer(t_buffer *buff, char c);
 void				print_buffer(t_buffer *buff);
 
 char				*ft_lli_itoa_base(long long int n, char *base_str);
+char				*ft_ulli_itoa_base(unsigned long long int n, char *base_str);
 
 int					ft_printf(const char *str, ...);
 

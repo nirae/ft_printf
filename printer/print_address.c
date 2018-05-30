@@ -6,24 +6,20 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 19:54:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/29 16:04:24 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/05/30 15:22:30 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-/*static void		print_width(t_env *env, int len)
+static void		print_width(t_env *env, int len)
 {
 	int				i;
 
 	i = -1;
-	if (env->flags.precision >= 0 && len > env->flags.precision)
-		while (++i < env->flags.width - env->flags.precision)
-			env->len += putchar_in_buffer(&env->buff, ' ');
-	else
-		while (++i < env->flags.width - len)
-			env->len += putchar_in_buffer(&env->buff, ' ');
-}*/
+	while (++i < env->flags.width - len)
+		env->len += putchar_in_buffer(&env->buff, ' ');
+}
 
 /*
 ** Printer for flag 'p'
@@ -32,22 +28,23 @@
 int		print_address(t_env *env)
 {
 	int			i;
+	int			len;
 
 	i = -1;
 	env->types.ulli = (long long int)va_arg(env->va, void *);
-	if (env->flags.width > 1)
+	env->types.str = ft_lli_itoa_base(env->types.ulli, "0123456789abcdef");
+	len = ft_strlen(env->types.str) + 2;
+	if (env->flags.width > 0)
 	{
 		if (env->flags.align == RIGHT)
-			while (++i < env->flags.width - 1)
-				env->len += putchar_in_buffer(&env->buff, ' ');
+			print_width(env, len);
 		env->len += putstr_in_buffer(&env->buff, "0x");
-		env->len += putstr_in_buffer(&env->buff, ft_lli_itoa_base(env->types.ulli, "0123456789abcdef"));
+		env->len += putstr_in_buffer(&env->buff, env->types.str);
 		if (env->flags.align == LEFT)
-			while (++i < env->flags.width - 1)
-				env->len += putchar_in_buffer(&env->buff, ' ');
+			print_width(env, len);
 		return (TRUE);
 	}
 	env->len += putstr_in_buffer(&env->buff, "0x");
-	env->len += putstr_in_buffer(&env->buff, ft_itoa_base(env->types.i, 16));
+	env->len += putstr_in_buffer(&env->buff, env->types.str);
 	return (TRUE);
 }
