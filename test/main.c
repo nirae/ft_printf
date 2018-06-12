@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/30 19:15:13 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:53:09 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int		main()
 	//ft_printf("coucou tout le monde %-0100%");
 	//long int d = 3;
 	//printf("vrai : %D\n", d);
-	ft_printf("moii : %-#-#--O\n", 12);
-	printf("vrai : %-#-#--O\n", 12);
+	ft_printf("moii : % d\n", -42);
+	printf("vrai : % d\n", -42);
 	//ft_printf("vrai : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_printf("moii : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_getleaks("coucou");

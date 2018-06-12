@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 08:41:35 by ndubouil          #+#    #+#              #
-#    Updated: 2018/05/30 18:35:03 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/04 00:42:02 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC		=	$(PA)/is_valid_flags.c		\
 			$(PR)/print_address.c		\
 			$(PR)/print_number.c		\
 			$(PR)/print_octal.c			\
+			$(PR)/print_hexa.c			\
 			$(PR)/print_unsigned_number.c		\
 			$(PR)/ft_ulli_itoa_base.c	\
 			$(PR)/ft_lli_itoa_base.c	\

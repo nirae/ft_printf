@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_number.c                                     :+:      :+:    :+:   */
+/*   print_hexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/28 22:17:55 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/07 12:01:38 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/06/04 00:39:59 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/05 00:10:55 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,46 @@ static int		print_width(t_env *env, int len, char c)
 	int				limit;
 
 	i = -1;
+	
+	if ((c == '0' && env->flags.precision < 0) || env->flags.width <= 0)
+	{
+		if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
+		{
+			if (env->flags.type == 'X')
+				env->len += putstr_in_buffer(&env->buff, "0X");
+			else
+				env->len += putstr_in_buffer(&env->buff, "0x");
+		}
+	}
 	if (env->flags.width <= 0)
 		return (0);
 	if (env->flags.precision > len)
 		len = len + (env->flags.precision - len);
-	limit = env->flags.width - len;
-	if (env->flags.sign == 1 && env->types.str[0] != '-')
-		limit--;
+	if (ft_strcmp("0", env->types.str) == 0 && env->flags.precision == 0)
+		limit = env->flags.width;
+	else
+		limit = env->flags.width - len;
+	if (env->flags.hash && ft_strcmp("0", env->types.str) != 0)
+		limit -= 2;
+	if (c == '0' && env->flags.precision >= 0)
+		c = ' ';
 	if (env->flags.space && c == '0')
 	{
 		limit--;
 		env->len += putchar_in_buffer(&env->buff, ' ');
 	}
-	//if (env->flags.precision >= 0 && len > env->flags.precision)
-	/*if (env->flags.precision >= 0 && len > env->flags.precision)
-		while (++i < env->flags.width - (len - env->flags.precision))
-			env->len += putchar_in_buffer(&env->buff, c);
-	else
-		while (++i < env->flags.width - len)
-			env->len += putchar_in_buffer(&env->buff, c);*/
-	//ft_putnbr(limit);
 	while (++i < limit)
 		env->len += putchar_in_buffer(&env->buff, c);
+	if (c != '0')
+	{
+		if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
+		{
+			if (env->flags.type == 'X')
+				env->len += putstr_in_buffer(&env->buff, "0X");
+			else
+				env->len += putstr_in_buffer(&env->buff, "0x");
+		}
+	}
 	return (1);
 }
 
@@ -50,12 +68,6 @@ static int		print_string_with_precision(t_env *env, int len)
 	i = (env->flags.precision - len);
 	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
 		return (0);
-	if (env->types.str[0] == '-')
-	{
-		env->len += putchar_in_buffer(&env->buff, '-');
-		env->types.str = &env->types.str[1];
-		i++;
-	}
 	if (env->flags.precision > len)
 	{
 		while (i > 0)
@@ -70,34 +82,38 @@ static int		print_string_with_precision(t_env *env, int len)
 
 static void		get_number(t_env *env)
 {
-	if (env->flags.size == H)
-		env->types.str = ft_lli_itoa_base((short)va_arg(env->va, int), "0123456789");
-	else if (env->flags.size == HH)
-		env->types.str = ft_lli_itoa_base((char)va_arg(env->va, int), "0123456789");
-	else if (env->flags.size == L || env->flags.type == 'D')
-		env->types.str = ft_lli_itoa_base(va_arg(env->va, long int), "0123456789");
-	else if (env->flags.size == LL)
-		env->types.str = ft_lli_itoa_base(va_arg(env->va, long long int), "0123456789");
-	else if (env->flags.size == J)
-		env->types.str = ft_lli_itoa_base(va_arg(env->va, intmax_t), "0123456789");
-	else if (env->flags.size == Z)
-		env->types.str = ft_lli_itoa_base(va_arg(env->va, size_t), "0123456789");
+	char	ref[16];
+
+	if (env->flags.type == 'X')
+		ft_strcpy(ref, "0123456789ABCDEF");
 	else
-		env->types.str = ft_lli_itoa_base(va_arg(env->va, int), "0123456789");
+		ft_strcpy(ref, "0123456789abcdef");
+	if (env->flags.size == H)
+		env->types.str = ft_ulli_itoa_base((unsigned short)va_arg(env->va, int), ref);
+	else if (env->flags.size == HH)
+		env->types.str = ft_ulli_itoa_base((unsigned char)va_arg(env->va, int), ref);
+	else if (env->flags.size == L || env->flags.type == 'O')
+		env->types.str = ft_ulli_itoa_base(va_arg(env->va, unsigned long int), ref);
+	else if (env->flags.size == LL)
+		env->types.str = ft_ulli_itoa_base(va_arg(env->va, unsigned long long int), ref);
+	else if (env->flags.size == J)
+		env->types.str = ft_ulli_itoa_base(va_arg(env->va, uintmax_t), ref);
+	else if (env->flags.size == Z)
+		env->types.str = ft_ulli_itoa_base((unsigned long long)va_arg(env->va, unsigned long long int), ref);
+	else
+		env->types.str = ft_ulli_itoa_base(va_arg(env->va, unsigned int), ref);
 }
 
 /*
 **
 */
 
-int		print_number(t_env *env)
+int		print_hexa(t_env *env)
 {
 	int					len;
 
 	get_number(env);
 	len = ft_strlen(env->types.str);
-	if (env->flags.width >= 0)
-	{
 		if (env->flags.align == RIGHT)
 		{
 			if (env->flags.zero && env->flags.precision <= len)
@@ -114,13 +130,9 @@ int		print_number(t_env *env)
 		}
 		if (env->flags.space && !env->flags.sign && !env->flags.width)
 			env->len += putchar_in_buffer(&env->buff, ' ');
-		if (env->flags.sign && env->types.str[0] != '-')
-			env->len += putchar_in_buffer(&env->buff, '+');
 		print_string_with_precision(env, len);
 		if (env->flags.align == LEFT)
 			print_width(env, len, ' ');
 		return (TRUE);
-	}
-	print_string_with_precision(env, len);
 	return (TRUE);
 }

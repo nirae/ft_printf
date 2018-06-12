@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:36:53 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/30 19:16:13 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/04 00:38:17 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static int		print_string_with_precision(t_env *env, int len)
 {
 	int				i;
 	
-	i = (env->flags.precision - len);
-	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
+	i = (env->flags.precision - (len + env->flags.hash));
+	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0 && env->flags.hash == 0)
 		return (0);
-	if (env->flags.hash && ft_strcmp("0", env->types.str) != 0)
+	if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
 		env->len += putchar_in_buffer(&env->buff, '0');
-	if (env->flags.precision > len)
+	if (env->flags.precision > len + env->flags.hash)
 	{
 		while (i > 0)
 		{

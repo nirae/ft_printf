@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 08:37:23 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 09:46:25 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/03 18:54:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int		set_flags(char *str, t_env **env)
 		F_ZERO = TRUE;
 	if (str[POS] == ' ' && !F_SIGN)
 		F_SPACE = TRUE;
-	F_HASH = (str[POS] == '#') ? TRUE : FALSE;
+	if (str[POS] == '#')
+		F_HASH = TRUE;
 	POS++;
 	return (set_flags(str, env));
 }
