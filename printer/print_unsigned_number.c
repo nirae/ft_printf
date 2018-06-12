@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 15:34:01 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/30 18:31:37 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/12 23:31:42 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,8 @@ static int		print_width(t_env *env, int len, char c)
 	if (env->flags.precision > len)
 		len = len + (env->flags.precision - len);
 	limit = env->flags.width - len;
-	if (env->flags.sign == 1 && env->types.str[0] != '-')
-		limit--;
 	if (c == '0' && env->flags.precision >= 0)
 		c = ' ';
-	if (env->flags.space && c == '0')
-	{
-		limit--;
-		env->len += putchar_in_buffer(&env->buff, ' ');
-	}
 	while (++i < limit)
 		env->len += putchar_in_buffer(&env->buff, c);
 	return (1);
@@ -44,12 +37,6 @@ static int		print_string_with_precision(t_env *env, int len)
 	i = (env->flags.precision - len);
 	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
 		return (0);
-	if (env->types.str[0] == '-')
-	{
-		env->len += putchar_in_buffer(&env->buff, '-');
-		env->types.str = &env->types.str[1];
-		i++;
-	}
 	if (env->flags.precision > len)
 	{
 		while (i > 0)
@@ -64,12 +51,12 @@ static int		print_string_with_precision(t_env *env, int len)
 
 static void		get_number(t_env *env)
 {
-	if (env->flags.size == H)
+	if (env->flags.size == L || env->flags.type == 'U')
+		env->types.str = ft_ulli_itoa_base(va_arg(env->va, unsigned long int), "0123456789");
+	else if (env->flags.size == H)
 		env->types.str = ft_ulli_itoa_base((unsigned short)va_arg(env->va, int), "0123456789");
 	else if (env->flags.size == HH)
 		env->types.str = ft_ulli_itoa_base((unsigned char)va_arg(env->va, int), "0123456789");
-	else if (env->flags.size == L || env->flags.type == 'U')
-		env->types.str = ft_ulli_itoa_base(va_arg(env->va, unsigned long int), "0123456789");
 	else if (env->flags.size == LL)
 		env->types.str = ft_ulli_itoa_base(va_arg(env->va, unsigned long long int), "0123456789");
 	else if (env->flags.size == J)
@@ -96,20 +83,11 @@ int		print_unsigned_number(t_env *env)
 		{
 			if (env->flags.zero && env->flags.precision <= len)
 			{
-				if (env->types.str[0] == '-')
-				{
-					env->len += putchar_in_buffer(&env->buff, '-');
-					env->types.str = &env->types.str[1];
-				}
 				print_width(env, len, '0');
 			}
 			else
 				print_width(env, len, ' ');
 		}
-		if (env->flags.space && !env->flags.sign && !env->flags.width)
-			env->len += putchar_in_buffer(&env->buff, ' ');
-		if (env->flags.sign && env->types.str[0] != '-')
-			env->len += putchar_in_buffer(&env->buff, '+');
 		print_string_with_precision(env, len);
 		if (env->flags.align == LEFT)
 			print_width(env, len, ' ');

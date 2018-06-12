@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 22:17:55 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/07 12:01:38 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/12 20:42:48 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,20 @@ int		print_number(t_env *env)
 				{
 					env->len += putchar_in_buffer(&env->buff, '-');
 					env->types.str = &env->types.str[1];
+					env->flags.sign = 0;
+				}
+				else if (env->flags.sign)
+				{
+					env->len += putchar_in_buffer(&env->buff, '+');
+					env->flags.width--;
+					env->flags.sign = 0;
 				}
 				print_width(env, len, '0');
 			}
 			else
 				print_width(env, len, ' ');
 		}
-		if (env->flags.space && !env->flags.sign && !env->flags.width)
+		if (env->flags.space && !env->flags.sign && !env->flags.width && env->types.str[0] != '-')
 			env->len += putchar_in_buffer(&env->buff, ' ');
 		if (env->flags.sign && env->types.str[0] != '-')
 			env->len += putchar_in_buffer(&env->buff, '+');
