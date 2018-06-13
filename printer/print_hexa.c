@@ -6,11 +6,22 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 00:39:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/12 23:37:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/13 17:46:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+static void		print_prefix(t_env *env)
+{
+	if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
+	{
+		if (env->flags.type == 'X')
+			env->len += putstr_in_buffer(&env->buff, "0X");
+		else
+			env->len += putstr_in_buffer(&env->buff, "0x");
+	}
+}
 
 static int		print_width(t_env *env, int len, char c)
 {
@@ -20,15 +31,7 @@ static int		print_width(t_env *env, int len, char c)
 	i = -1;
 	
 	if ((c == '0' && env->flags.precision < 0) || env->flags.width <= 0)
-	{
-		if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
-		{
-			if (env->flags.type == 'X')
-				env->len += putstr_in_buffer(&env->buff, "0X");
-			else
-				env->len += putstr_in_buffer(&env->buff, "0x");
-		}
-	}
+		print_prefix(env);
 	if (env->flags.width <= 0)
 		return (0);
 	if (env->flags.precision > len)
@@ -49,15 +52,7 @@ static int		print_width(t_env *env, int len, char c)
 	while (++i < limit)
 		env->len += putchar_in_buffer(&env->buff, c);
 	if (c != '0')
-	{
-		if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
-		{
-			if (env->flags.type == 'X')
-				env->len += putstr_in_buffer(&env->buff, "0X");
-			else
-				env->len += putstr_in_buffer(&env->buff, "0x");
-		}
-	}
+		print_prefix(env);	
 	return (1);
 }
 
@@ -68,6 +63,8 @@ static int		print_string_with_precision(t_env *env, int len)
 	i = (env->flags.precision - len);
 	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
 		return (0);
+	//if (!env->flags.zero && env->flags.hash)
+	//	print_prefix(env);
 	if (env->flags.precision > len)
 	{
 		while (i > 0)

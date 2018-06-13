@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/04 00:43:26 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/13 17:24:04 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int		ft_printf(const char *str, ...)
 		if (!parser(string, &env))
 			return (FAIL);
 		// DEBUG
-		//print_tflags(&env);
+	//	print_tflags(&env);
 		printer(&env);
 		//if (is_valid_type(string[env.pos]))
 		//	print_types(string[env.pos], &env);
