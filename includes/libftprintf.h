@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/04 00:42:26 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/14 19:53:18 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFTPRINTF_H
 
 # include "../libft/libft.h"
+# include <locale.h>
 # include <stdarg.h>
 
 /*
@@ -86,6 +87,7 @@ typedef union		u_types
 {
 	char			c;
 	char			*str;
+	//wint_t			w;
 	int				i;
 	long int		li;
 	long long int	lli;
@@ -143,6 +145,7 @@ int					set_precision(char *str, t_env **env);
 */
 
 int					print_char(t_env *env);
+int					print_big_char(t_env *env);
 int					print_string(t_env *env);
 int					print_address(t_env *env);
 int					print_number(t_env *env);
