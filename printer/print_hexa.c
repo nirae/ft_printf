@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 00:39:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/13 17:46:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/15 19:59:09 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void		print_prefix(t_env *env)
 			env->len += putstr_in_buffer(&env->buff, "0X");
 		else
 			env->len += putstr_in_buffer(&env->buff, "0x");
+		env->flags.hash = 0;
+		env->flags.width-= 2;
 	}
 }
 
@@ -52,7 +54,35 @@ static int		print_width(t_env *env, int len, char c)
 	while (++i < limit)
 		env->len += putchar_in_buffer(&env->buff, c);
 	if (c != '0')
-		print_prefix(env);	
+		print_prefix(env);
+	return (1);
+}
+
+static int		print_width_left(t_env *env, int len, char c)
+{
+	int				i;
+	int				limit;
+
+	i = -1;
+	if (env->flags.width <= 0)
+		return (0);
+	if (env->flags.precision > len)
+		len = len + (env->flags.precision - len);
+	if (ft_strcmp("0", env->types.str) == 0 && env->flags.precision == 0)
+		limit = env->flags.width;
+	else
+		limit = env->flags.width - len;
+	if (env->flags.hash && ft_strcmp("0", env->types.str) != 0)
+		limit -= 2;
+	if (c == '0' && env->flags.precision >= 0)
+		c = ' ';
+	if (env->flags.space && c == '0')
+	{
+		limit--;
+		env->len += putchar_in_buffer(&env->buff, ' ');
+	}
+	while (++i < limit)
+		env->len += putchar_in_buffer(&env->buff, c);
 	return (1);
 }
 
@@ -63,8 +93,8 @@ static int		print_string_with_precision(t_env *env, int len)
 	i = (env->flags.precision - len);
 	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
 		return (0);
-	//if (!env->flags.zero && env->flags.hash)
-	//	print_prefix(env);
+	if (!env->flags.zero && env->flags.hash)
+		print_prefix(env);
 	if (env->flags.precision > len)
 	{
 		while (i > 0)
@@ -129,7 +159,7 @@ int		print_hexa(t_env *env)
 			env->len += putchar_in_buffer(&env->buff, ' ');
 		print_string_with_precision(env, len);
 		if (env->flags.align == LEFT)
-			print_width(env, len, ' ');
+			print_width_left(env, len, ' ');
 		return (TRUE);
 	return (TRUE);
 }

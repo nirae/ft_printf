@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 22:17:55 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/12 20:42:48 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/15 16:01:30 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static int		print_width(t_env *env, int len, char c)
 		limit--;
 		env->len += putchar_in_buffer(&env->buff, ' ');
 	}
+	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
+		env->len += putchar_in_buffer(&env->buff, ' ');
+
 	//if (env->flags.precision >= 0 && len > env->flags.precision)
 	/*if (env->flags.precision >= 0 && len > env->flags.precision)
 		while (++i < env->flags.width - (len - env->flags.precision))
