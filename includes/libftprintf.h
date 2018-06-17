@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/15 15:30:15 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/17 20:23:44 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int					set_precision(char *str, t_env **env);
 */
 
 int					print_char(t_env *env);
+int					print_big_char(t_env *env);
 int					print_string(t_env *env);
 int					print_address(t_env *env);
 int					print_number(t_env *env);

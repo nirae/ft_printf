@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/15 17:01:26 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/17 20:26:38 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ int		parser(char *str, t_env *env)
 
 int		printer(t_env *env)
 {
-	//if ((env->flags.type == 'c' && env->flags.size == 'l') ||
-	//	env->flags.type == 'C')
-	//	print_lchar(&env);
-	if (env->flags.type == '%')
+	if ((env->flags.type == 'c' && env->flags.size == L) ||
+		env->flags.type == 'C')
+		print_big_char(env);
+	else if (env->flags.type == '%')
 		print_percent(env);
 	else if (env->flags.type == 'c')
 		print_char(env);
