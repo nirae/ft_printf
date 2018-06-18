@@ -6,11 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/06/14 20:25:14 by ndubouil         ###   ########.fr       */
-=======
-/*   Updated: 2018/06/17 20:18:27 by ndubouil         ###   ########.fr       */
->>>>>>> 7679f43a60f58ef4ac21d0fa516bca799a85541b
+/*   Updated: 2018/06/18 22:48:39 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +36,12 @@ int		main()
 	//ft_printf("coucou tout le monde %-0100%");
 	//long int d = 3;
 	//printf("vrai : %D\n", d);
-<<<<<<< HEAD
-	ft_printf("moii : %C\n", 0x40501);
-	printf("vrai : %C\n", 0x40501);
-=======
+	int a = ft_printf("moii : %lc\n", 0x40501);
+	int b = printf("vrai : %lc\n", 0x40501);
 	//printf("test : #-18x\n");	
-	int a = ft_printf("moii : %C\n", 0x6f);
-	int b = printf("vrai : %C\n", 0x6f);
 
 	printf("\nretour moi = %d\n", a);
 	printf("retour vrai = %d\n", b);
->>>>>>> 7679f43a60f58ef4ac21d0fa516bca799a85541b
 	//ft_printf("vrai : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_printf("moii : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_getleaks("coucou");

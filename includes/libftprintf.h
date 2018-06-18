@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/18 14:48:52 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/18 23:48:33 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../libft/libft.h"
 # include <locale.h>
 # include <stdarg.h>
-# include <locale.h>
 
 /*
 ** MACROS for struct t_env
@@ -88,7 +87,7 @@ typedef union		u_types
 {
 	char			c;
 	char			*str;
-	//wint_t			w;
+	wchar_t			wc;
 	int				i;
 	long int		li;
 	long long int	lli;
@@ -161,6 +160,7 @@ int					print_hexa(t_env *env);
 int					putstr_in_buffer(t_buffer *buff, char *str);
 int					putchar_in_buffer(t_buffer *buff, char c);
 void				print_buffer(t_buffer *buff);
+void				delete_buffer(t_buffer *buff);
 
 char				*ft_lli_itoa_base(long long int n, char *base_str);
 char				*ft_ulli_itoa_base(unsigned long long int n, char *base_str);

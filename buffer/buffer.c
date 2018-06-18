@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:06:12 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/25 17:08:01 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/18 23:48:03 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ int		putchar_in_buffer(t_buffer *buff, char c)
 	buff->buff[buff->len] = c;
 	buff->len++;
 	return (1);
+}
+
+void		delete_buffer(t_buffer *buff)
+{
+	ft_bzero(buff->buff, buff->len);
+	buff->len = 0;
 }
 
 /*
