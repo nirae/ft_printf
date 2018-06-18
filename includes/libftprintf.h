@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/14 19:53:18 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/18 14:48:52 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <locale.h>
 # include <stdarg.h>
+# include <locale.h>
 
 /*
 ** MACROS for struct t_env

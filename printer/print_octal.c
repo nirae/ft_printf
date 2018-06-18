@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:36:53 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/04 00:38:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/15 16:03:28 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int		print_width(t_env *env, int len, char c)
 	limit = env->flags.width - len;
 	if (env->flags.hash && ft_strcmp("0", env->types.str) != 0)
 		limit--;
+	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
+		env->len += putchar_in_buffer(&env->buff, ' ');
 	if (c == '0' && env->flags.precision >= 0)
 		c = ' ';
 	if (env->flags.space && c == '0')
