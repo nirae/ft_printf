@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:06:12 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/18 23:48:03 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/19 18:30:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ int		putchar_in_buffer(t_buffer *buff, char c)
 	return (1);
 }
 
-void		delete_buffer(t_buffer *buff)
-{
-	ft_bzero(buff->buff, buff->len);
-	buff->len = 0;
-}
-
 /*
 **	Print and clean the buffer
 */
@@ -74,4 +68,23 @@ void		print_buffer(t_buffer *buff)
 	write(1, buff->buff, buff->len);
 	ft_bzero(buff->buff, buff->len);
 	buff->len = 0;
+	buff->pos_last_conv = 0;
+}
+
+#include <stdio.h>
+
+void		delete_end_of_buffer(t_buffer *buff, int start)
+{
+	int i;
+
+	//printf("\nSTART = %d\n", start);
+	i = start;
+	while (buff->buff[i] != '\0')
+	{
+		//ft_putchar(buff->buff[i]);
+		buff->buff[i] = '\0';
+		buff->len--;
+		i++;	
+	}
+	print_buffer(buff);
 }

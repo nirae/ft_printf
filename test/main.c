@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/18 22:48:39 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/19 20:49:18 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,14 @@ int		main()
 	//ft_printf("coucou tout le monde %-0100%");
 	//long int d = 3;
 	//printf("vrai : %D\n", d);
-	int a = ft_printf("moii : %lc\n", 0x40501);
-	int b = printf("vrai : %lc\n", 0x40501);
+	//int a = ft_printf("moii = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
+	ft_putendl("moi = ");
+	int a = ft_printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
+	
+	ft_putendl("");
+	//int b = printf("vrai = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
+	ft_putendl("vrai = ");
+	int b = printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
 	//printf("test : #-18x\n");	
 
 	printf("\nretour moi = %d\n", a);

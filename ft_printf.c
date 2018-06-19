@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/18 23:52:33 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/19 18:27:19 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,7 @@ int		parser(char *str, t_env *env)
 
 int		printer(t_env *env)
 {
-	if ((env->flags.type == 'c' && env->flags.size == L) ||
-		env->flags.type == 'C')
+	if ((env->flags.type == 'c' && env->flags.size == L) ||env->flags.type == 'C')
 		print_big_char(env);
 	else if (env->flags.type == '%')
 		print_percent(env);
@@ -147,8 +146,16 @@ int		printer(t_env *env)
 	else if (env->flags.type == 'x' || env->flags.type == 'X')
 		print_hexa(env);
 	else
-		return (0);
-	return (1);
+		return (FALSE);
+	if (env->len == -1)
+	{
+		delete_end_of_buffer(&env->buff, env->buff.pos_last_conv);
+		//print_buffer(&env->buff);
+		return (FAIL);
+	}
+	else
+		env->buff.pos_last_conv = env->buff.len;
+	return (TRUE);
 }
 
 int		ft_printf(const char *str, ...)
@@ -163,6 +170,7 @@ int		ft_printf(const char *str, ...)
 	env.pos = 0;
 	env.len = 0;
 	env.buff.len = 0;
+	env.buff.pos_last_conv = 0;
 	while (string[env.pos] != 0)
 	{
 		if (string[env.pos] != '%')
@@ -176,7 +184,9 @@ int		ft_printf(const char *str, ...)
 			return (FAIL);
 		// DEBUG
 	//	print_tflags(&env);
-		printer(&env);
+		//printer(&env);
+		if (printer(&env) == FAIL)
+			return (-1);
 		//if (is_valid_type(string[env.pos]))
 		//	print_types(string[env.pos], &env);
 	}

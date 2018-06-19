@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 17:06:45 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/18 23:50:44 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/19 17:58:53 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,5 @@ int		print_big_char(t_env *env)
 	}
 	dispatch_size(env, len, result);
 	env->len += putstr_in_buffer(&env->buff, result);
-	print_buffer(&env->buff);
 	return (TRUE);
 }

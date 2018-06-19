@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/18 23:48:33 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/19 15:16:43 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,17 @@ typedef enum		e_size
 	Z
 }					t_size;
 
-typedef union		u_types
+typedef union					u_types
 {
-	char			c;
-	char			*str;
-	wchar_t			wc;
-	int				i;
-	long int		li;
-	long long int	lli;
-	unsigned long long int ulli;
-	short int		si;
-}					t_types;
+	char						c;
+	char						*str;
+	wchar_t						wc;
+	int							i;
+	long int					li;
+	long long int				lli;
+	unsigned long long int 		ulli;
+	short int					si;
+}								t_types;
 
 typedef struct		s_flags
 {
@@ -113,6 +113,7 @@ typedef struct		s_flags
 typedef	struct		s_buffer
 {
 	int				len;
+	int				pos_last_conv;
 	char			buff[BUFFER_SIZE];
 }					t_buffer;
 
@@ -160,7 +161,7 @@ int					print_hexa(t_env *env);
 int					putstr_in_buffer(t_buffer *buff, char *str);
 int					putchar_in_buffer(t_buffer *buff, char c);
 void				print_buffer(t_buffer *buff);
-void				delete_buffer(t_buffer *buff);
+void				delete_end_of_buffer(t_buffer *buff, int start);
 
 char				*ft_lli_itoa_base(long long int n, char *base_str);
 char				*ft_ulli_itoa_base(unsigned long long int n, char *base_str);
