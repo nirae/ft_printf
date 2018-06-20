@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_big_char.c                                   :+:      :+:    :+:   */
+/*   print_big_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/14 17:06:45 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/20 21:47:21 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/06/20 20:00:04 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/20 20:07:01 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,6 @@ void		fourth_case(int c, char result[5])
 		result[1] = '\0';
 }
 
-/*void		dispatch_size(t_env *env, char result[4])
-{
-	if (env->types.i >= 0 && env->types.i <= 0x7f)
-	{
-		result[0] = (unsigned char)env->types.i;
-		result[1] = '\0';
-	}
-	else if (env->types.i >= 0x80 && env->types.i <= 0x7ff)
-		second_case(env->types.i, result);	
-	else if ((env->types.i >= 0x800 && env->types.i <= 0xd7ff) ||
-				(env->types.i >= 0xe000 && env->types.i <= 0xffff))
-		third_case(env->types.i, result);	
-	else if (env->types.i >= 0x10000 && env->types.i <= 0x10ffff)
-		second_case(env->types.i, result);
-	else
-		env->len = -1;
-}*/
-
 void		dispatch_size(t_env *env, int len, char result[5])
 {
 	if (len == 1)
@@ -77,9 +59,9 @@ void		dispatch_size(t_env *env, int len, char result[5])
 		result[1] = '\0';
 	}
 	else if (len == 2)
-		second_case(env->types.i, result);	
+		second_case(env->types.i, result);
 	else if (len == 3)
-		third_case(env->types.i, result);	
+		third_case(env->types.i, result);
 	else if (len == 4)
 		fourth_case(env->types.i, result);
 	else
@@ -103,43 +85,60 @@ int			take_len(int i)
 		return (-1);
 }
 
-/*
-** Printer for flag 'C'
-*/
-#include <stdio.h>
-int		print_big_char(t_env *env)
+int			put_big_char()
 {
-	long long int		i;
-	char				result[5];
-	int					len;
+	
+}
+
+static void		print_width(t_env *env, int len)
+{
+	int				i;
 
 	i = -1;
-	env->types.i = va_arg(env->va, int);
-	if ((len = take_len(env->types.i)) == -1)
+	if (env->flags.precision >= 0 && len > env->flags.precision)
+		while (++i < env->flags.width - env->flags.precision)
+			env->len += putchar_in_buffer(&env->buff, ' ');
+	else
+		while (++i < env->flags.width - len)
+			env->len += putchar_in_buffer(&env->buff, ' ');
+}
+
+static void		print_string_with_precision(t_env *env, int len)
+{
+	int				i;
+
+	i = -1;
+	if (env->flags.precision >= 0)
 	{
-		env->len = -1;
-		return (FALSE);
+		while (++i < env->flags.precision && i < len)
+			env->len += putchar_in_buffer(&env->buff, env->types.str[i]);
 	}
-	if (env->types.i == 0)
-		env->len++;
-	// MARCHE PAS
-	if (MB_CUR_MAX == 1 && env->types.i > 127)
-		i--;
-	/*else
-		limit = len;*/
-	if (env->flags.width > 1)
+	else
+		env->len += putstr_in_buffer(&env->buff, env->types.str);
+}
+
+/*
+ ** Printer for flag 's'
+ */
+
+int		print_big_string(t_env *env)
+{
+	char				nullstr[7];
+	int					len;
+
+	ft_strcpy(nullstr, "(null)");
+	if ((env->types.str = va_arg(env->va, char *)) == NULL)
+		env->types.str = nullstr;
+	len = ft_strlen(env->types.str);
+	if (env->flags.width >= 1)
 	{
 		if (env->flags.align == RIGHT)
-			while (++i < env->flags.width - len)
-				env->len += putchar_in_buffer(&env->buff, ' ');
-		dispatch_size(env, len, result);
-		env->len += putstr_in_buffer(&env->buff, result);
+			print_width(env, len);
+		print_string_with_precision(env, len);
 		if (env->flags.align == LEFT)
-			while (++i < env->flags.width - len)
-				env->len += putchar_in_buffer(&env->buff, ' ');
+			print_width(env, len);
 		return (TRUE);
 	}
-	dispatch_size(env, len, result);
-	env->len += putstr_in_buffer(&env->buff, result);
+	print_string_with_precision(env, len);
 	return (TRUE);
 }

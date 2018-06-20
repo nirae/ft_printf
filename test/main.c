@@ -6,12 +6,13 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 20:49:18 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/20 21:28:13 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 #include <stdio.h>
+#include <locale.h>
 
 void 	ft_getleaks(char *str)
 {
@@ -22,6 +23,8 @@ void 	ft_getleaks(char *str)
 
 int		main()
 {
+	//char		*locale;
+	//locale = setlocale(LC_ALL, "");
 	//int i = 3;
 	//int i = ft_printf("coucou %s %s %c %d\n", "blabla", "Nico", 'a', 10);
 	//ft_putnbr(i);
@@ -38,12 +41,18 @@ int		main()
 	//printf("vrai : %D\n", d);
 	//int a = ft_printf("moii = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
 	ft_putendl("moi = ");
-	int a = ft_printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
+	//int a = ft_printf("%8C et coco %C titi %lc", 250, 0x11ffff, 'a');
+	int a = ft_printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
+	//ft_putchar('|');
+	//int a = ft_printf("%C", 256);
 	
 	ft_putendl("");
 	//int b = printf("vrai = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
 	ft_putendl("vrai = ");
-	int b = printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
+	//int b = printf("%8C et coco %C titi %lc", 250, 0x11ffff, 'a');
+	int b = printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
+	//ft_putchar('|');
+	//int b = printf("%C", 256);
 	//printf("test : #-18x\n");	
 
 	printf("\nretour moi = %d\n", a);

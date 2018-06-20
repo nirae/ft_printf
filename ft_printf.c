@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 18:27:19 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/20 15:44:51 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,9 @@ int		ft_printf(const char *str, ...)
 {
 	t_env		env;
 	char		*string;
-	char		*locale;
+	//char		*locale;
 
-	locale = setlocale(LC_ALL, "");
+	//locale = setlocale(LC_ALL, "");
 	va_start(env.va, str);
 	string = (char *)str;
 	env.pos = 0;

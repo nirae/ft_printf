@@ -6,14 +6,14 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 10:26:48 by ndubouil          #+#    #+#              #
-#    Updated: 2018/01/17 08:20:53 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/20 21:17:09 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Binaries and Flags
 CC		=	/usr/bin/gcc
 RM		=	/bin/rm
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wextra -Werror -Wall -fsanitize=address
 # Directories
 PRINTFLIB		=	..
 LIB		=	../libft/
@@ -22,7 +22,7 @@ HEADER	=	.
 MAIN	=	main.c
 OBJ		=	$(patsubst %.c,%.o,$(SRC))
 # Name
-NAME	=	printf
+NAME	=	my_test_printf
 
 .PHONY: all clean fclean re
 
@@ -34,6 +34,13 @@ $(NAME):	$(OBJ) $(MAIN) $(LIB) $(PRINTFLIB) Makefile
 		@make -C $(PRINTFLIB)
 		@echo "Building $(NAME) ..."
 		@$(CC) $(CFLAGS) $(MAIN) $(OBJ) -L$(PRINTFLIB) -lftprintf -o $(NAME)
+		@echo "OK"
+
+d:			$(OBJ) main_d.c $(LIB) $(PRINTFLIB) Makefile
+		@echo "Compiling libftprintf ..."
+		@make -C $(PRINTFLIB)
+		@echo "Building $(NAME) ..."
+		@$(CC) $(CFLAGS) main_d.c $(OBJ) -L$(PRINTFLIB) -lftprintf -o $(NAME)_d
 		@echo "OK"
 
 %.o: 		%.c
