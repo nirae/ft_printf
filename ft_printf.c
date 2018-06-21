@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 14:20:49 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/21 19:09:58 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,60 +30,6 @@ void	print_tflags(t_env *env)
 	printf("type : %c\n", env->flags.type);
 }
 ///////////////////////////////////////////////////////////
-/*
-   void	print_types(char c, t_env *env)
-   {
-   if (c == 's')
-   {
-   env->types.str = va_arg(env->va, char *);
-   ft_putstr(env->types.str);
-   env->len += ft_strlen(env->types.str);
-   }
-   if (c == 'd' || c == 'i')
-   {
-   env->types.i = va_arg(env->va, int);
-   ft_putnbr(env->types.i);
-   env->len += ft_strlen(ft_itoa(env->types.i));
-   }
-   if (c == 'c')
-   {
-   env->types.c = (char)va_arg(env->va, int);
-   ft_putchar(env->types.c);
-   env->len += 1;
-   }
-   if (c == 'p')
-   {
-   env->types.i = va_arg(env->va, int);
-   ft_putstr("0x7fff");
-   ft_putstr(ft_itoa_base(env->types.i, 16));
-   env->len += ft_strlen(ft_itoa_base(env->types.i, 16));
-   }
-   if (c == 'b')
-   {
-   env->types.i = va_arg(env->va, int);
-   ft_putstr(ft_itoa_base(env->types.i, 2));
-   env->len += ft_strlen(ft_itoa_base(env->types.i, 2));
-   }
-   if (c == 'o')
-   {
-   env->types.i = va_arg(env->va, int);
-   ft_putstr(ft_itoa_base(env->types.i, 8));
-   env->len += ft_strlen(ft_itoa_base(env->types.i, 8));
-   }
-   env->pos += 1;
-   }*/
-
-/*int		catch_arg()
-  {
-  char		*result;
-
-
-  }
-
-  int		print_integer(t_env **env)
-  {
-
-  }*/
 
 int		print_percent(t_env *env)
 {
@@ -127,6 +73,8 @@ int		printer(t_env *env)
 {
 	if ((env->flags.type == 'c' && env->flags.size == L) ||env->flags.type == 'C')
 		print_big_char(env);
+	else if ((env->flags.type == 's' && env->flags.size == L) ||env->flags.type == 'S')
+		print_big_string(env);
 	else if (env->flags.type == '%')
 		print_percent(env);
 	else if (env->flags.type == 'C' || (env->flags.type == 'c' && env->flags.size == L))
@@ -150,7 +98,7 @@ int		printer(t_env *env)
 	if (env->len == -1)
 	{
 		delete_end_of_buffer(&env->buff, env->buff.pos_last_conv);
-		//print_buffer(&env->buff);
+		print_buffer(&env->buff);
 		return (FAIL);
 	}
 	else
@@ -162,9 +110,7 @@ int		ft_printf(const char *str, ...)
 {
 	t_env		env;
 	char		*string;
-	//char		*locale;
 
-	//locale = setlocale(LC_ALL, "");
 	va_start(env.va, str);
 	string = (char *)str;
 	env.pos = 0;
@@ -184,11 +130,8 @@ int		ft_printf(const char *str, ...)
 			return (FAIL);
 		// DEBUG
 	//	print_tflags(&env);
-		//printer(&env);
 		if (printer(&env) == FAIL)
 			return (-1);
-		//if (is_valid_type(string[env.pos]))
-		//	print_types(string[env.pos], &env);
 	}
 	va_end(env.va);
 	print_buffer(&env.buff);

@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 08:41:35 by ndubouil          #+#    #+#              #
-#    Updated: 2018/06/18 14:48:29 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/21 19:05:16 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		=	$(PA)/is_valid_flags.c		\
 			$(PA)/set_precision.c		\
 			$(PR)/print_char.c			\
 			$(PR)/print_big_char.c			\
+			$(PR)/print_big_string.c			\
 			$(PR)/print_string.c		\
 			$(PR)/print_address.c		\
 			$(PR)/print_number.c		\

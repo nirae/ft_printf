@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 17:06:45 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 15:38:13 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/21 19:03:16 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,37 +51,21 @@ void		fourth_case(int c, char result[5])
 		result[1] = '\0';
 }
 
-/*void		dispatch_size(t_env *env, char result[4])
-{
-	if (env->types.i >= 0 && env->types.i <= 0x7f)
-	{
-		result[0] = (unsigned char)env->types.i;
-		result[1] = '\0';
-	}
-	else if (env->types.i >= 0x80 && env->types.i <= 0x7ff)
-		second_case(env->types.i, result);	
-	else if ((env->types.i >= 0x800 && env->types.i <= 0xd7ff) ||
-				(env->types.i >= 0xe000 && env->types.i <= 0xffff))
-		third_case(env->types.i, result);	
-	else if (env->types.i >= 0x10000 && env->types.i <= 0x10ffff)
-		second_case(env->types.i, result);
-	else
-		env->len = -1;
-}*/
 
-void		dispatch_size(t_env *env, int len, char result[5])
+
+void		dispatch_size(t_env *env, int c, int len, char result[5])
 {
 	if (len == 1)
 	{
-		result[0] = (unsigned char)env->types.i;
+		result[0] = (unsigned char)c;
 		result[1] = '\0';
 	}
 	else if (len == 2)
-		second_case(env->types.i, result);	
+		second_case(c, result);	
 	else if (len == 3)
-		third_case(env->types.i, result);	
+		third_case(c, result);	
 	else if (len == 4)
-		fourth_case(env->types.i, result);
+		fourth_case(c, result);
 	else
 		env->len = -1;
 }
@@ -103,6 +87,16 @@ int			take_len(int i)
 		return (-1);
 }
 
+int		take_big_char(t_env *env, int c, char result[5])
+{
+	int		len;
+	
+	if ((len = take_len(c)) == -1)
+		return (-1);
+	dispatch_size(env, c, len, result);
+	return (len);
+}
+
 /*
 ** Printer for flag 'C'
 */
@@ -115,31 +109,28 @@ int		print_big_char(t_env *env)
 
 	i = -1;
 	env->types.i = va_arg(env->va, int);
-	if ((len = take_len(env->types.i)) == -1)
+	
+	//if ((len = take_len(env->types.i)) == -1)
+	if ((len = take_big_char(env, env->types.i, result)) == -1)
 	{
 		env->len = -1;
 		return (FALSE);
 	}
 	if (env->types.i == 0)
 		env->len++;
-	// MARCHE PAS
-	//if (MB_CUR_MAX == 1 && env->types.i > 127)
-	//	i--;
-	/*else
-		limit = len;*/
 	if (env->flags.width > 1)
 	{
 		if (env->flags.align == RIGHT)
 			while (++i < env->flags.width - len)
 				env->len += putchar_in_buffer(&env->buff, ' ');
-		dispatch_size(env, len, result);
+		//dispatch_size(env, len, result);
 		env->len += putstr_in_buffer(&env->buff, result);
 		if (env->flags.align == LEFT)
 			while (++i < env->flags.width - len)
 				env->len += putchar_in_buffer(&env->buff, ' ');
 		return (TRUE);
 	}
-	dispatch_size(env, len, result);
+	//dispatch_size(env, len, result);
 	env->len += putstr_in_buffer(&env->buff, result);
 	return (TRUE);
 }

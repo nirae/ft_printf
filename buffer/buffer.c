@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:06:12 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 14:21:08 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/21 17:33:34 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void		delete_end_of_buffer(t_buffer *buff, int start)
 		buff->len--;
 		i++;	
 	}
-	print_buffer(buff);
+	//print_buffer(buff);
 }
