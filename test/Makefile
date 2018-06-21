@@ -6,14 +6,14 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 10:26:48 by ndubouil          #+#    #+#              #
-#    Updated: 2018/06/20 21:17:09 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/21 14:10:48 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Binaries and Flags
 CC		=	/usr/bin/gcc
 RM		=	/bin/rm
-CFLAGS	=	-Wextra -Werror -Wall -fsanitize=address
+CFLAGS	=	-Wextra -Werror -Wall
 # Directories
 PRINTFLIB		=	..
 LIB		=	../libft/

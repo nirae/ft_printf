@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 17:06:45 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/20 21:47:21 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/21 15:38:13 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int		print_big_char(t_env *env)
 	if (env->types.i == 0)
 		env->len++;
 	// MARCHE PAS
-	if (MB_CUR_MAX == 1 && env->types.i > 127)
-		i--;
+	//if (MB_CUR_MAX == 1 && env->types.i > 127)
+	//	i--;
 	/*else
 		limit = len;*/
 	if (env->flags.width > 1)
