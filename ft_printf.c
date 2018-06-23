@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/23 02:13:25 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 00:00:01 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		printer(t_env *env)
 		return (FAIL);
 	}
 	env->buff.pos_last_conv = ft_strlen(env->buff.buff);
+	print_buffer(&env->buff);
 	return (TRUE);
 }
 

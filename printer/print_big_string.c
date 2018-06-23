@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 20:00:04 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/22 23:31:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 00:39:05 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,15 @@ static int		print_string_with_precision(t_env *env, int len)
 
 int		print_big_string(t_env *env)
 {
-	//char				nullstr[7];
+	wchar_t				nullwstr[7];
 	int					len;
 	int					big_len;
 
-	//ft_strcpy(nullstr, "(null)");
-	//if ((env->types.wc = va_arg(env->va, wchar_t *)) == NULL)
-	env->types.wc = va_arg(env->va, wchar_t *);
-		//env->types.wc = nullstr;
+	ft_wstrcpy(nullwstr, "(null)");
+	if ((env->types.wc = va_arg(env->va, wchar_t *)) == NULL)
+		env->types.wc = nullwstr;
 	len = ft_wstrlen(env->types.wc);
 	big_len = ft_bigstrlen(env->types.wc);
-	//printf("LEN = %d\n", len);
 	if (env->flags.width >= 1)
 	{
 		if (env->flags.align == RIGHT)

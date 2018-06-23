@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 09:16:22 by ndubouil          #+#    #+#              #
-#    Updated: 2018/01/24 08:11:28 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/24 00:23:12 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC		=	ft_putchar.c		\
 	  	ft_isspace_tab_nl.c		\
 	  	ft_strdup.c				\
 	  	ft_strcpy.c				\
+	  	ft_wstrcpy.c				\
 	  	ft_strncpy.c			\
 	  	ft_strcat.c				\
 	  	ft_strncat.c			\
