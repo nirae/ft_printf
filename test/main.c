@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 20:04:38 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/23 01:56:18 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void 	ft_getleaks(char *str)
 
 int		main()
 {
-	setlocale(LC_ALL, "");
-	int s[4];
-	s[0] = 0x53;
-	s[1] = 0x3abc;
-	s[2] = 0x81000;
-	s[3] = '\0';
+	//setlocale(LC_ALL, "");
+	//int s[4];
+	//s[0] = 0x53;
+	//s[1] = 0x3abc;
+	//s[2] = 0x81000;
+	//s[3] = '\0';
 	//int i = 3;
 	//int i = ft_printf("coucou %s %s %c %d\n", "blabla", "Nico", 'a', 10);
 	//ft_putnbr(i);
@@ -46,22 +46,22 @@ int		main()
 	//int a = ft_printf("moii = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
 	ft_putendl("moi = ");
 	//int a = ft_printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
-	//int a = ft_printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
+	int a = ft_printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
 	//int a = ft_printf("%6C et coco %C titi %C tyty", 3250, 0xd800, 'u');
 	//ft_putchar('|');
 	//int a;	
-	//int a = ft_printf("%C", 256);
-	int a = ft_printf("%S", s);
+	//int a = ft_printf("%C", 0xdb02);
+	//int a = ft_printf("%15.5ls", s);
 	ft_putendl("");
 	//int b = printf("vrai = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
 	ft_putendl("vrai = ");
 	//int b = printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
 	//int b = printf("%6C et coco %C titi %C tyty", 3250, 0xd800, 'u');
-	//int b = printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
+	int b = printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
 	//ft_putchar('|');
 	
-	int b = printf("%S", s);
-	//int b = printf("%C", 256);
+	//int b = printf("%15.5ls", s);
+	//int b = printf("%C", 0xdb02);
 	//printf("test : #-18x\n");	
 
 	printf("\nretour moi = %d\n", a);

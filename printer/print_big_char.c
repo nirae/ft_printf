@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 17:06:45 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 19:03:16 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/23 02:09:00 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void		dispatch_size(t_env *env, int c, int len, char result[5])
 
 int			take_len(int i)
 {
-	if (MB_CUR_MAX == 1 && i > 255)
+	if ((MB_CUR_MAX == 1 && i > 255) || (i > 0xD7FF && i < 0xE000))
 		return (-1);
-	else if ((i >= 0 && i <= 0x7f) || MB_CUR_MAX == 1)
+	if ((i >= 0 && i <= 0x7f) || MB_CUR_MAX == 1)
 		return (1);
 	else if (i >= 0x80 && i <= 0x7ff)
 		return (2);
@@ -109,8 +109,6 @@ int		print_big_char(t_env *env)
 
 	i = -1;
 	env->types.i = va_arg(env->va, int);
-	
-	//if ((len = take_len(env->types.i)) == -1)
 	if ((len = take_big_char(env, env->types.i, result)) == -1)
 	{
 		env->len = -1;
@@ -128,6 +126,7 @@ int		print_big_char(t_env *env)
 		if (env->flags.align == LEFT)
 			while (++i < env->flags.width - len)
 				env->len += putchar_in_buffer(&env->buff, ' ');
+		//print_buffer(&env->buff);	
 		return (TRUE);
 	}
 	//dispatch_size(env, len, result);

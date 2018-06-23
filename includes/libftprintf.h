@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 19:05:36 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/22 20:28:27 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef union					u_types
 {
 	char						c;
 	char						*str;
-	wchar_t						wc;
+	wchar_t						*wc;
 	int							i;
 	long int					li;
 	long long int				lli;
@@ -156,7 +156,7 @@ int					print_octal(t_env *env);
 int					print_hexa(t_env *env);
 
 int					take_big_char(t_env *env, int c, char result[5]);
-
+int					take_len(int i);
 /*
 ** BUFFER
 */

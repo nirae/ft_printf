@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:06:12 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 17:33:34 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/23 01:57:09 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		putstr_in_buffer(t_buffer *buff, char *str)
 	int		i;
 	int		strlen;
 
-	strlen = ft_strlen(str);
+	strlen = ft_strlen((char *)str);
 	i = -1;
 	while (++i <= strlen)
 	{
@@ -66,7 +66,7 @@ int		putchar_in_buffer(t_buffer *buff, char c)
 void		print_buffer(t_buffer *buff)
 {
 	write(1, buff->buff, buff->len);
-	ft_bzero(buff->buff, buff->len);
+	ft_strclr(buff->buff);
 	buff->len = 0;
 	buff->pos_last_conv = 0;
 }

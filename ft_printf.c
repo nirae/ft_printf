@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/21 19:09:58 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/23 02:13:25 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int		printer(t_env *env)
 		print_big_string(env);
 	else if (env->flags.type == '%')
 		print_percent(env);
-	else if (env->flags.type == 'C' || (env->flags.type == 'c' && env->flags.size == L))
-		print_big_char(env);
 	else if (env->flags.type == 'c')
 		print_char(env);
 	else if (env->flags.type == 's')
@@ -101,8 +99,7 @@ int		printer(t_env *env)
 		print_buffer(&env->buff);
 		return (FAIL);
 	}
-	else
-		env->buff.pos_last_conv = ft_strlen(env->buff.buff);
+	env->buff.pos_last_conv = ft_strlen(env->buff.buff);
 	return (TRUE);
 }
 
