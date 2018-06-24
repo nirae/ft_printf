@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 08:41:35 by ndubouil          #+#    #+#              #
-#    Updated: 2018/06/21 19:05:16 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/24 19:29:29 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIB		=	./libft/
 H		=	./includes
 PA		=	./parser
 PR		=	./printer
+U_TOOLS	=	./printer/unicode_tools
 B		=	./buffer
 #  Files
 HFILES	=	$(H)/libftprintf.h
@@ -42,9 +43,11 @@ SRC		=	$(PA)/is_valid_flags.c		\
 			$(PR)/print_octal.c			\
 			$(PR)/print_hexa.c			\
 			$(PR)/print_unsigned_number.c		\
-			$(PR)/ft_ulli_itoa_base.c	\
-			$(PR)/ft_lli_itoa_base.c	\
 			$(B)/buffer.c				\
+			$(U_TOOLS)/get_big_char.c				\
+			$(U_TOOLS)/ft_bigcharlen.c				\
+			$(U_TOOLS)/ft_bigstrlen.c				\
+			$(U_TOOLS)/ft_wstrlen.c				\
 			ft_printf.c
 OBJ		=	$(patsubst %.c,%.o,$(SRC))
 # Name
@@ -53,7 +56,6 @@ NAME	=	libftprintf.a
 .PHONY: all clean fclean re
 
 all:		$(NAME)
-		@true
 
 $(NAME):	$(OBJ) $(MAIN) $(HFILES) $(LIB) Makefile
 		@echo "Compiling libft ..."

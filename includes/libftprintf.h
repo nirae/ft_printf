@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 18:39:30 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 20:38:58 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct					s_env
 }								t_env;
 
 /*
-** Parsing (parser/)
+** Parsing (parser/...)
 */
 
 int								is_valid_flags(char c);
@@ -121,23 +121,30 @@ int								set_width(char *str, t_env *env);
 int								set_precision(char *str, t_env *env);
 
 /*
-** Printing
+** Printing (printer/...)
 */
 
-int					print_char(t_env *env);
-int					print_big_char(t_env *env);
-int					print_big_string(t_env *env);
-int					print_string(t_env *env);
-int					print_address(t_env *env);
-int					print_number(t_env *env);
+int								print_char(t_env *env);
+int								print_big_char(t_env *env);
+int								print_string(t_env *env);
+int								print_big_string(t_env *env);
+int								print_address(t_env *env);
+int								print_number(t_env *env);
 int					print_unsigned_number(t_env *env);
 int					print_octal(t_env *env);
 int					print_hexa(t_env *env);
 
-int					take_big_char(t_env *env, int c, char result[5]);
-int					take_len(int i);
 /*
-** BUFFER
+**	Tools for unicode (printer/unicode_tools/..)
+*/
+
+int								get_big_char(t_env *env, int c, char result[5]);
+int								ft_bigcharlen(int i);
+int								ft_wstrlen(wchar_t *str);
+int								ft_bigstrlen(wchar_t *str);
+
+/*
+** Buffer (buffer/buffer.c)
 */
 
 int					putstr_in_buffer(t_buffer *buff, char *str);
@@ -145,8 +152,9 @@ int					putchar_in_buffer(t_buffer *buff, char c);
 void				print_buffer(t_buffer *buff);
 void				delete_end_of_buffer(t_buffer *buff, int start);
 
-char				*ft_lli_itoa_base(long long int n, char *base_str);
-char				*ft_ulli_itoa_base(unsigned long long int n, char *base_str);
+/*
+**	THE FT_PRINTF !!!
+*/
 
 int					ft_printf(const char *str, ...);
 

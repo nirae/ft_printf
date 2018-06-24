@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 19:54:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/30 15:22:30 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 20:21:47 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		print_width(t_env *env, int len)
 ** Printer for flag 'p'
 */
 
-int		print_address(t_env *env)
+int				print_address(t_env *env)
 {
 	int			i;
 	int			len;
@@ -46,5 +46,6 @@ int		print_address(t_env *env)
 	}
 	env->len += putstr_in_buffer(&env->buff, "0x");
 	env->len += putstr_in_buffer(&env->buff, env->types.str);
+	ft_strdel(&env->types.str);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 10:26:48 by ndubouil          #+#    #+#              #
-#    Updated: 2018/06/21 16:52:06 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/24 19:46:37 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,13 @@ d:			$(OBJ) main_d.c $(LIB) $(PRINTFLIB) Makefile
 		@make -C $(PRINTFLIB)
 		@echo "Building $(NAME) ..."
 		@$(CC) $(CFLAGS) main_d.c $(OBJ) -L$(PRINTFLIB) -lftprintf -o $(NAME)_d
+		@echo "OK"
+
+leaks:		$(OBJ) main_leaks.c $(LIB) $(PRINTFLIB) Makefile
+		@echo "Compiling libftprintf ..."
+		@make -C $(PRINTFLIB)
+		@echo "Building $(NAME) ..."
+		@$(CC) $(CFLAGS) main_leaks.c $(OBJ) -L$(PRINTFLIB) -lftprintf -o $(NAME)_leaks
 		@echo "OK"
 
 %.o: 		%.c

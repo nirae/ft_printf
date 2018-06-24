@@ -6,38 +6,11 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 20:00:04 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 18:34:27 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 20:08:40 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
-
-static int		ft_wstrlen(wchar_t *str)
-{
-	int		i;
-	int		len;
-
-	i = -1;
-	len = 0;
-	while (str[++i] != 0)
-		len++;
-	return (len);
-}
-
-static int		ft_bigstrlen(wchar_t *str)
-{
-	int		i;
-	int		len;
-
-	i = -1;
-	len = 0;
-	while (str[++i] != 0)
-	{
-		len += take_len(str[i]);
-	}
-	return (len);
-}
 
 static int		print_width(t_env *env, int len)
 {
@@ -46,14 +19,15 @@ static int		print_width(t_env *env, int len)
 
 	i = 0;
 	final_preci = 0;
-	while ((final_preci + take_len(env->types.wstr[i])) < env->flags.precision)
+	while ((final_preci + ft_bigcharlen(env->types.wstr[i]))
+				< env->flags.precision)
 	{
-		if (take_len(env->types.wstr[i]) == -1)
+		if (ft_bigcharlen(env->types.wstr[i]) == -1)
 		{
 			env->len = -1;
 			return (FALSE);
 		}
-		final_preci += take_len(env->types.wstr[i]);
+		final_preci += ft_bigcharlen(env->types.wstr[i]);
 		i++;
 	}
 	i = -1;
@@ -66,37 +40,50 @@ static int		print_width(t_env *env, int len)
 	return (TRUE);
 }
 
+static int		precision_pos(t_env *env, int len)
+{
+	int			i;
+	int			big_len;
+	char		result[5];
+
+	i = -1;
+	big_len = 0;
+	while (big_len < env->flags.precision && ++i < len)
+	{
+		if ((big_len += ft_bigcharlen(env->types.wstr[i]))
+				> env->flags.precision)
+		{
+			big_len -= ft_bigcharlen(env->types.wstr[i]);
+			break ;
+		}
+		if ((get_big_char(env, env->types.wstr[i], result)) == -1)
+		{
+			env->len = -1;
+			return (FALSE);
+		}
+		env->len += putstr_in_buffer(&env->buff, result);
+	}
+	return (TRUE);
+}
+
 static int		print_string_with_precision(t_env *env, int len)
 {
 	int				i;
 	char			result[5];
-	int				c_len;
 	int				big_len;
 
 	i = -1;
 	big_len = 0;
 	if (env->flags.precision >= 0)
 	{
-		while (big_len < env->flags.precision && ++i < len)
-		{
-			if ((big_len += take_len(env->types.wstr[i])) > env->flags.precision)
-			{
-				big_len -= take_len(env->types.wstr[i]);
-				break;
-			}
-			if ((c_len = take_big_char(env, env->types.wstr[i], result)) == -1)
-			{
-				env->len = -1;
-				return (FALSE);
-			}
-			env->len += putstr_in_buffer(&env->buff, result);
-		}
+		if (!(precision_pos(env, len)))
+			return (FALSE);
 	}
 	else
 	{
 		while (++i < len)
 		{
-			if ((c_len = take_big_char(env, env->types.wstr[i], result)) == -1)
+			if ((get_big_char(env, env->types.wstr[i], result)) == -1)
 			{
 				env->len = -1;
 				return (FALSE);
@@ -108,10 +95,10 @@ static int		print_string_with_precision(t_env *env, int len)
 }
 
 /*
- ** Printer for flag 'S'
- */
+** Printer for flag 'S'
+*/
 
-int		print_big_string(t_env *env)
+int				print_big_string(t_env *env)
 {
 	wchar_t				nullwstr[7];
 	int					len;

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lli_itoa_base.c                                 :+:      :+:    :+:   */
+/*   ft_ulli_itoa_base.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 15:30:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/30 15:30:06 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/05/28 20:14:51 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/24 18:51:08 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-static int	ft_count(long long int n, int base)
+static int	ft_count(unsigned long long int n, int base)
 {
 	int		i;
 
@@ -25,27 +25,20 @@ static int	ft_count(long long int n, int base)
 	return (i);
 }
 
-char		*ft_lli_itoa_base(long long int n, char *base_str)
+char		*ft_ulli_itoa_base(unsigned long long int n, char *base_str)
 {
 	int		len;
-	int		isneg;
 	int		base;
 	char	*result;
 
 	base = ft_strlen(base_str);
-	isneg = n < 0 ? 1 : 0;
 	len = ft_count(n, base);
-	if (!(result = ft_strnew(len + isneg)))
+	if (!(result = ft_strnew(len)))
 		return (NULL);
-	result[0] = isneg ? '-' : '0';
-	if (isneg)
-		len++;
+	result[0] = '0';
 	while (n != 0)
 	{
-		if (n < 0)
-			result[--len] = base_str[-1 * (n % base)];
-		else
-			result[--len] = base_str[n % base];
+		result[--len] = base_str[n % base];
 		n = n / base;
 	}
 	return (result);

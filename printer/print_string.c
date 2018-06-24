@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 21:07:13 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/30 15:24:33 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:22:33 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		print_width(t_env *env, int len)
 static void		print_string_with_precision(t_env *env, int len)
 {
 	int				i;
-	
+
 	i = -1;
 	if (env->flags.precision >= 0)
 	{
@@ -43,10 +43,10 @@ static void		print_string_with_precision(t_env *env, int len)
 ** Printer for flag 's'
 */
 
-int		print_string(t_env *env)
+int				print_string(t_env *env)
 {
-	char				nullstr[7];
-	int					len;
+	char			nullstr[7];
+	int				len;
 
 	ft_strcpy(nullstr, "(null)");
 	if ((env->types.str = va_arg(env->va, char *)) == NULL)

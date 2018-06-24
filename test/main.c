@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 17:24:50 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 20:17:08 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void 	ft_getleaks(char *str)
 int		main()
 {
 	//setlocale(LC_ALL, "");
-	int s[4];
-	s[0] = 0x53;
-	s[1] = 0x3abc;
-	s[2] = 0x81000;
-	s[3] = '\0';
+	//int s[4];
+	//s[0] = 0x53;
+	//s[1] = 0x3abc;
+	//s[2] = 0x81000;
+	//s[3] = '\0';
 	//int i = 3;
 	//int i = ft_printf("coucou %s %s %c %d\n", "blabla", "Nico", 'a', 10);
 	//ft_putnbr(i);
@@ -45,7 +45,7 @@ int		main()
 	//long int d = 3;
 	//printf("vrai : %D\n", d);
 	//int a = ft_printf("moii = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
-	ft_putendl("moi = ");
+	//ft_putendl("moi = ");
 	//int a = ft_printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
 	//int a = ft_printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
 	//int a = ft_printf("%9.6ls %S", s, (wchar_t *)'a');
@@ -80,8 +80,8 @@ int		main()
 	*/
 	
 	//int b = printf("vrai = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
-	ft_putendl("");
-	ft_putendl("vrai = ");
+	//ft_putendl("");
+	//ft_putendl("vrai = ");
 	//int b = printf("%9.6ls %S", s, (wchar_t *)'a');
 	//int b = printf();
 	//int b = printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
@@ -101,7 +101,7 @@ int		main()
 	**	Cas indefinis faux sur Moulitest
 	*/
 
-	int b = 0;
+	//int b = 0;
 
 	//b = printf("%llx, %llx", 0, ULLONG_MAX);
 	//b = printf("%.0p, %.p", 0, 0);
@@ -123,11 +123,12 @@ int		main()
 	*/
 
 
-	printf("\nretour moi = %d\n", a);
-	printf("retour vrai = %d\n", b);
+	//printf("\nretour moi = %d\n", a);
+	//printf("retour vrai = %d\n", b);
 	//ft_printf("vrai : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_printf("moii : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
-	//ft_getleaks("coucou");
+	ft_printf("%C", 3250);
+	ft_getleaks("coucou");
 	
 	return (0);
 }
