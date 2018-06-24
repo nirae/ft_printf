@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 20:17:08 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 00:55:58 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void 	ft_getleaks(char *str)
 {
-	system("leaks printf");
+	system("leaks my_test_printf");
 	printf("%s\n", str);
 	getchar();
 }
@@ -127,8 +127,7 @@ int		main()
 	//printf("retour vrai = %d\n", b);
 	//ft_printf("vrai : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_printf("moii : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
-	ft_printf("%C", 3250);
-	ft_getleaks("coucou");
-	
+	ft_printf("%d", 3250);
+	//ft_getleaks("fin du main");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:44:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 20:40:22 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 00:39:10 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void 	ft_getleaks(char *str)
 {
-	system("leaks printf");
+	system("leaks printf -fullContent");
 	printf("%s\n", str);
 	getchar();
 }

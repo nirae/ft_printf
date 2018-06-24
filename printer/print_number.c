@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 22:17:55 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 21:02:43 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 01:17:08 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static int		print_string_with_precision(t_env *env, int len)
 	return (0);
 }
 
-static void		get_number(t_env *env)
+static int		get_number(t_env *env)
 {
 	if (env->flags.size == H)
-		env->types.str =
+		env->types.str = 
 			ft_lli_itoa_base((short)va_arg(env->va, int), "0123456789");
 	else if (env->flags.size == HH)
 		env->types.str =
@@ -88,15 +88,24 @@ static void		get_number(t_env *env)
 	else
 		env->types.str =
 			ft_lli_itoa_base(va_arg(env->va, int), "0123456789");
+	if (env->types.str == NULL)
+		return (FALSE);
+	return (TRUE);
 }
 
 static void		padding_right(t_env *env, int len)
 {
+	//char		*tmp;
+
 	if (env->flags.zero && env->flags.precision <= len)
 	{
 		if (env->types.str[0] == '-')
 		{
 			env->len += putchar_in_buffer(&env->buff, '-');
+			//tmp = &env->types.str[1];
+			//ft_strdel(&env->types.str);
+			//env->types.str = tmp;
+			//ft_strdel(&tmp);
 			env->types.str = &env->types.str[1];
 			env->flags.sign = 0;
 		}
@@ -120,7 +129,9 @@ int				print_number(t_env *env)
 {
 	int					len;
 
-	get_number(env);
+	// GERER ERREUR MALLOC
+	if (!(get_number(env)))
+		return (FAIL);
 	len = ft_strlen(env->types.str);
 	if (env->flags.width < 0)
 	{
