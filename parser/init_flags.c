@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 08:12:31 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 09:05:49 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:04:32 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 **		Size l ll h hh j z none : false
 */
 
-void	init_flags(t_env **env)
+void	init_flags(t_env *env)
 {
-	F_ALIGN = RIGHT;
-	F_SIGN = FALSE;
-	F_ZERO = FALSE;
-	F_SPACE = FALSE;
-	F_HASH = FALSE;
-	F_WIDTH = 0;
-	F_PRECISION = 0;
-	F_SIZE = FALSE;
-	F_TYPE = FALSE;
+	env->flags.align = RIGHT;
+	env->flags.sign = FALSE;
+	env->flags.zero = FALSE;
+	env->flags.space = FALSE;
+	env->flags.hash = FALSE;
+	env->flags.width = 0;
+	env->flags.precision = 0;
+	env->flags.size = FALSE;
+	env->flags.type = FALSE;
 }

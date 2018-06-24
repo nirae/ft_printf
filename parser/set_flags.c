@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 08:37:23 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/03 18:54:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:40:13 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,26 @@
 ** Return TRUE when finished
 */
 
-int		set_flags(char *str, t_env **env)
+int		set_flags(char *str, t_env *env)
 {
-	if (!is_valid_flags(str[POS]))
+	if (!is_valid_flags(str[env->pos]))
 		return (TRUE);
-	// DEBUG
-	//printf("flag : %c\n", str[POS]);
-	if (str[POS] == '-')
+	if (str[env->pos] == '-')
 	{
-		F_ALIGN = LEFT;
-		F_ZERO = FALSE;
+		env->flags.align = LEFT;
+		env->flags.zero = FALSE;
 	}
-	if (str[POS] == '+')
+	if (str[env->pos] == '+')
 	{
-		F_SIGN = TRUE;
-		F_SPACE = FALSE;
+		env->flags.sign = TRUE;
+		env->flags.space = FALSE;
 	}
-	if (str[POS] == '0' && F_ALIGN != LEFT)
-		F_ZERO = TRUE;
-	if (str[POS] == ' ' && !F_SIGN)
-		F_SPACE = TRUE;
-	if (str[POS] == '#')
-		F_HASH = TRUE;
-	POS++;
+	if (str[env->pos] == '0' && env->flags.align != LEFT)
+		env->flags.zero = TRUE;
+	if (str[env->pos] == ' ' && !env->flags.sign)
+		env->flags.space = TRUE;
+	if (str[env->pos] == '#')
+		env->flags.hash = TRUE;
+	env->pos++;
 	return (set_flags(str, env));
 }

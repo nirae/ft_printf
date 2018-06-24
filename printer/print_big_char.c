@@ -6,11 +6,12 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 17:06:45 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/23 02:09:00 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 14:58:28 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 void		second_case(int c, char result[5])
 {

@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:26:20 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 11:26:13 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:16:34 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 ** Return TRUE when finished
 */
 
-int		set_width(char *str, t_env **env)
+int		set_width(char *str, t_env *env)
 {
 	long long int		i;
 
 	i = 0;
-	while (ft_isdigit(str[POS]))
+	while (ft_isdigit(str[env->pos]))
 	{
-		i = (str[POS] - '0' + i * 10);
-		POS++;
+		i = (str[env->pos] - '0' + i * 10);
+		env->pos++;
 	}
-	if (str[POS] == '*')
+	if (str[env->pos] == '*')
 	{
-		i = va_arg((*env)->va, int);
-		POS++;
+		i = va_arg(env->va, int);
+		env->pos++;
 	}
-	F_WIDTH = i;
+	env->flags.width = i;
 	return (TRUE);
 }

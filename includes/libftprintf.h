@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/22 20:28:27 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:39:30 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,31 @@
 # define LIBFTPRINTF_H
 
 # include "../libft/libft.h"
-# include <locale.h>
 # include <stdarg.h>
 
 /*
 ** MACROS for struct t_env
 */
 
-# define POS			(*env)->pos
-# define LEN			(*env)->len
+# define FALSE			0
+# define TRUE			1
+# define RIGHT			2
+# define LEFT			3
+
+# define BUFFER_SIZE	4096
+
+# define FAIL			-666
 
 /*
-** MACROS for struct t_flags in t_env
+**		H =	4
+**		HH = 5
+**		L =	6
+**		LL = 7
+**		J =	8
+**		Z =	9
 */
 
-# define F_ZERO			(*env)->flags.zero
-# define F_ALIGN		(*env)->flags.align
-# define F_SIGN			(*env)->flags.sign
-# define F_SPACE		(*env)->flags.space
-# define F_HASH			(*env)->flags.hash
-# define F_WIDTH		(*env)->flags.width
-# define F_PRECISION	(*env)->flags.precision
-# define F_SIZE			(*env)->flags.size
-# define F_TYPE			(*env)->flags.type
-
-/*
-** MACROS for union t_types in t_env
-*/
-
-# define U_C			(*env)->types.c
-# define U_STR			(*env)->types.str
-# define U_I			(*env)->types.i
-# define U_LI			(*env)->types.li
-# define U_LLI			(*env)->types.lli
-
-# define RIGHT	2
-# define LEFT	3
-
-# define FAIL	-666
-
-/*
-** TRUE = 1
-** FALSE = 0
-*/
-
-typedef enum		e_bool
-{
-	FALSE,
-	TRUE
-}					t_bool;
-
-/*
-** H =	4
-** HH = 5
-** L =	6
-** LL = 7
-** J =	8
-** Z =	9
-*/
-
-typedef enum		e_size
+typedef enum					e_size
 {
 	H = 4,
 	HH,
@@ -81,13 +46,17 @@ typedef enum		e_size
 	LL,
 	J,
 	Z
-}					t_size;
+}								t_size;
+
+/*
+**	Union for store the argument
+*/
 
 typedef union					u_types
 {
 	char						c;
 	char						*str;
-	wchar_t						*wc;
+	wchar_t						*wstr;
 	int							i;
 	long int					li;
 	long long int				lli;
@@ -95,51 +64,61 @@ typedef union					u_types
 	short int					si;
 }								t_types;
 
-typedef struct		s_flags
-{
-	int				align;
-	int				sign;
-	int				zero;
-	int				space;
-	int				hash;
-	long long int	width;
-	long long int	precision;
-	int				size;
-	char			type;
-}					t_flags;
-
-# define BUFFER_SIZE 4096
-
-typedef	struct		s_buffer
-{
-	int				len;
-	int				pos_last_conv;
-	char			buff[BUFFER_SIZE];
-}					t_buffer;
-
-typedef struct		s_env
-{
-	t_types			types;
-	t_buffer		buff;
-	int				len;
-	int				pos;
-	va_list			va;
-	t_flags			flags;
-}					t_env;
-
 /*
-** Parsing
+**	Structure for store the flags
 */
 
-int					is_valid_flags(char c);
-int					is_valid_sizeflag(char c);
-int					is_valid_type(char c);
-void				init_flags(t_env **env);
-int					set_flags(char *str, t_env **env);
-int					set_size(char *str, t_env **env);
-int					set_type(char *str, t_env **env);
-int					set_width(char *str, t_env **env);
-int					set_precision(char *str, t_env **env);
+typedef struct					s_flags
+{
+	int							align;
+	int							sign;
+	int							zero;
+	int							space;
+	int							hash;
+	long long int				width;
+	long long int				precision;
+	char						size;
+	char						type;
+}								t_flags;
+
+/*
+**	Structure for the buffer
+*/
+
+typedef	struct					s_buffer
+{
+	int							len;
+	int							pos_last_conv;
+	char						buff[BUFFER_SIZE];
+}								t_buffer;
+
+/*
+**	Environnement structure
+*/
+
+typedef struct					s_env
+{
+	t_types						types;
+	t_buffer					buff;
+	int							len;
+	int							pos;
+	va_list						va;
+	t_flags						flags;
+}								t_env;
+
+/*
+** Parsing (parser/)
+*/
+
+int								is_valid_flags(char c);
+int								is_valid_sizeflag(char c);
+int								is_valid_type(char c);
+void							init_flags(t_env *env);
+int								set_flags(char *str, t_env *env);
+int								set_size(char *str, t_env *env);
+int								set_type(char *str, t_env *env);
+int								set_width(char *str, t_env *env);
+int								set_precision(char *str, t_env *env);
 
 /*
 ** Printing

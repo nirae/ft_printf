@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:06:12 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/23 01:57:09 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:45:19 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **	Will be printed if the buffer is full
 */
 
-int		putstr_in_buffer(t_buffer *buff, char *str)
+int			putstr_in_buffer(t_buffer *buff, char *str)
 {
 	int		i;
 	int		strlen;
@@ -47,7 +47,7 @@ int		putstr_in_buffer(t_buffer *buff, char *str)
 **	Will be printed if the buffer is full
 */
 
-int		putchar_in_buffer(t_buffer *buff, char c)
+int			putchar_in_buffer(t_buffer *buff, char c)
 {
 	if (buff->len == BUFFER_SIZE)
 	{
@@ -71,20 +71,19 @@ void		print_buffer(t_buffer *buff)
 	buff->pos_last_conv = 0;
 }
 
-#include <stdio.h>
+/*
+**	Delete the end of the buffer form the "start" position to the end
+*/
 
 void		delete_end_of_buffer(t_buffer *buff, int start)
 {
 	int i;
 
-	//printf("\nSTART = %d\n", start);
 	i = start;
 	while (buff->buff[i] != '\0')
 	{
-		//ft_putchar(buff->buff[i]);
 		buff->buff[i] = '\0';
 		buff->len--;
-		i++;	
+		i++;
 	}
-	//print_buffer(buff);
 }

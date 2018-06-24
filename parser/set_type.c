@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:22:15 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 09:37:05 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:20:40 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 ** Return TRUE when finished or FALSE if no flags found
 */
 
-int		set_type(char *str, t_env **env)
+int		set_type(char *str, t_env *env)
 {
-	if (!is_valid_type(str[POS]))
+	if (!is_valid_type(str[env->pos]))
 		return (FALSE);
-	F_TYPE = str[POS];
-	POS++;
+	env->flags.type = str[env->pos];
+	env->pos++;
 	return (TRUE);
 }

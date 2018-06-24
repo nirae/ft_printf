@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:12:18 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/02/12 09:18:39 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:19:33 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,28 @@
 ** Return TRUE when finished or FALSE if no flags found
 */
 
-int		set_size(char *str, t_env **env)
+int		set_size(char *str, t_env *env)
 {
-	if (!is_valid_sizeflag(str[POS]))
+	if (!is_valid_sizeflag(str[env->pos]))
 		return (FALSE);
-	if (str[POS] == 'h')
-		F_SIZE = H;
-	else if (str[POS] == 'l')
-		F_SIZE = L;
-	else if (str[POS] == 'j')
-		F_SIZE = J;
-	else if (str[POS] == 'z')
-		F_SIZE = Z;
-	POS++;
-	if (F_SIZE == H && str[POS] == 'h')
+	if (str[env->pos] == 'h')
+		env->flags.size = H;
+	else if (str[env->pos] == 'l')
+		env->flags.size = L;
+	else if (str[env->pos] == 'j')
+		env->flags.size = J;
+	else if (str[env->pos] == 'z')
+		env->flags.size = Z;
+	env->pos++;
+	if (env->flags.size == H && str[env->pos] == 'h')
 	{
-		F_SIZE = HH;
-		POS++;
+		env->flags.size = HH;
+		env->pos++;
 	}
-	else if (F_SIZE == L && str[POS] == 'l')
+	else if (env->flags.size == L && str[env->pos] == 'l')
 	{
-		F_SIZE = LL;
-		POS++;
+		env->flags.size = LL;
+		env->pos++;
 	}
 	return (TRUE);
 }

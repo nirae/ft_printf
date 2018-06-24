@@ -6,24 +6,71 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 22:17:55 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 01:28:34 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:19:00 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
-static int		print_width(t_env *env, int len, char c)
+static int		print_width_right(t_env *env, int len, char c)
 {
 	int				i;
 	int				limit;
 
 	i = -1;
-	if (env->flags.width <= 0)
+	if (env->flags.width == 0)
+		return (0);
+	/*if (env->flags.width < 0)
+	{
+		env->flags.align = LEFT;
+		if (env->types.str[0] == '-')
+			env->flags.width = (len - 1) + -env->flags.width;
+		else
+			env->flags.width = len + -env->flags.width;
+		return (TRUE);
+	}*/
+	if (env->flags.precision > len)
+		len += (env->flags.precision - len);
+	if (env->types.str[0] == '-' && env->flags.precision > (len - 1))
+		len++;
+	limit = env->flags.width - len;
+	if ((env->flags.sign == 1 && env->types.str[0] != '-'))
+		limit--;
+	if (env->flags.space && c == '0')
+	{
+		limit--;
+		env->len += putchar_in_buffer(&env->buff, ' ');
+	}
+	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
+		env->len += putchar_in_buffer(&env->buff, ' ');
+
+	//if (env->flags.precision >= 0 && len > env->flags.precision)
+	/*if (env->flags.precision >= 0 && len > env->flags.precision)
+		while (++i < env->flags.width - (len - env->flags.precision))
+			env->len += putchar_in_buffer(&env->buff, c);
+	else
+		while (++i < env->flags.width - len)
+			env->len += putchar_in_buffer(&env->buff, c);*/
+	//ft_putnbr(limit);
+	while (++i < limit)
+		env->len += putchar_in_buffer(&env->buff, c);
+	return (1);
+}
+
+
+static int		print_width_left(t_env *env, int len, char c)
+{
+	int				i;
+	int				limit;
+
+	i = -1;
+	if (env->flags.width == 0)
 		return (0);
 	if (env->flags.precision > len)
-		len = len + (env->flags.precision - len);
-	//if (env->types.str[0] == '-')
-	//	len++;
+		len += (env->flags.precision - len);
+	if (env->types.str[0] == '-' && env->flags.precision > (len - 1))
+		len++;
 	limit = env->flags.width - len;
 	if ((env->flags.sign == 1 && env->types.str[0] != '-'))
 		limit--;
@@ -101,38 +148,40 @@ int		print_number(t_env *env)
 
 	get_number(env);
 	len = ft_strlen(env->types.str);
-	if (env->flags.width >= 0)
+	if (env->flags.width < 0)
 	{
-		if (env->flags.align == RIGHT)
-		{
-			if (env->flags.zero && env->flags.precision <= len)
-			{
-				if (env->types.str[0] == '-')
-				{
-					env->len += putchar_in_buffer(&env->buff, '-');
-					env->types.str = &env->types.str[1];
-					env->flags.sign = 0;
-				}
-				else if (env->flags.sign)
-				{
-					env->len += putchar_in_buffer(&env->buff, '+');
-					env->flags.width--;
-					env->flags.sign = 0;
-				}
-				print_width(env, len, '0');
-			}
-			else
-				print_width(env, len, ' ');
-		}
-		if (env->flags.space && !env->flags.sign && !env->flags.width && env->types.str[0] != '-')
-			env->len += putchar_in_buffer(&env->buff, ' ');
-		if (env->flags.sign && env->types.str[0] != '-')
-			env->len += putchar_in_buffer(&env->buff, '+');
-		print_string_with_precision(env, len);
-		if (env->flags.align == LEFT)
-			print_width(env, len, ' ');
-		return (TRUE);
+		env->flags.align = LEFT;
+		env->flags.width = -env->flags.width;
 	}
+	if (env->flags.align == RIGHT)
+	{
+		if (env->flags.zero && env->flags.precision <= len)
+		{
+			if (env->types.str[0] == '-')
+			{
+				env->len += putchar_in_buffer(&env->buff, '-');
+				env->types.str = &env->types.str[1];
+				env->flags.sign = 0;
+			}
+			else if (env->flags.sign)
+			{
+				env->len += putchar_in_buffer(&env->buff, '+');
+				env->flags.width--;
+				env->flags.sign = 0;
+			}
+			print_width_right(env, len, '0');
+		}
+		else
+			print_width_right(env, len, ' ');
+	}
+	if (env->flags.space && !env->flags.sign && !env->flags.width && env->types.str[0] != '-')
+		env->len += putchar_in_buffer(&env->buff, ' ');
+	if (env->flags.sign && env->types.str[0] != '-')
+		env->len += putchar_in_buffer(&env->buff, '+');
+	print_string_with_precision(env, len);
+	if (env->flags.align == LEFT)
+		print_width_left(env, len, ' ');
+	return (TRUE);
 	print_string_with_precision(env, len);
 	return (TRUE);
 }

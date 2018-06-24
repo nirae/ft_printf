@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 10:51:16 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/25 20:55:58 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:20:51 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int		print_char(t_env *env)
 
 	i = -1;
 	env->types.c = (char)va_arg(env->va, int);
+	if (env->flags.width < 0)
+	{
+		env->flags.align = LEFT;
+		env->flags.width = -env->flags.width;
+	}
 	if (env->flags.width > 1)
 	{
 		if (env->flags.align == RIGHT)

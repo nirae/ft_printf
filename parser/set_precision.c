@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:37:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/05/28 14:48:02 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:17:50 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,29 @@
 ** Return TRUE when finished or FALSE if no precision found
 */
 
-int		set_precision(char *str, t_env **env)
+int		set_precision(char *str, t_env *env)
 {
 	int		i;
 
 	i = 0;
-	if (str[POS] != '.')
+	if (str[env->pos] != '.')
 	{
-		F_PRECISION = -1;
+		env->flags.precision = -1;
 		return (FALSE);
 	}
-	POS++;
-	while (ft_isdigit(str[POS]))
+	env->pos++;
+	while (ft_isdigit(str[env->pos]))
 	{
-		i = (str[POS] - '0' + i * 10);
-		POS++;
+		i = (str[env->pos] - '0' + i * 10);
+		env->pos++;
 	}
-	if (str[POS] == '*')
+	if (str[env->pos] == '*')
 	{
-		i = va_arg((*env)->va, int);
+		i = va_arg(env->va, int);
 		if (i < 0)
 			i = -1;
-		POS++;
+		env->pos++;
 	}
-	F_PRECISION = i;
+	env->flags.precision = i;
 	return (TRUE);
 }

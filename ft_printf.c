@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 00:00:01 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:39:53 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ int		print_percent(t_env *env)
 
 int		parser(char *str, t_env *env)
 {
-	init_flags(&env);
-	set_flags(str, &env);
-	set_width(str, &env);
-	set_precision(str, &env);
-	set_size(str, &env);
-	if (!set_type(str, &env))
+	init_flags(env);
+	set_flags(str, env);
+	set_width(str, env);
+	set_precision(str, env);
+	set_size(str, env);
+	if (!set_type(str, env))
 		return (FALSE);
 	return (TRUE);
 }
@@ -125,7 +125,10 @@ int		ft_printf(const char *str, ...)
 		}
 		env.pos++;
 		if (!parser(string, &env))
+		{
+			print_buffer(&env.buff);
 			return (FAIL);
+		}
 		// DEBUG
 	//	print_tflags(&env);
 		if (printer(&env) == FAIL)

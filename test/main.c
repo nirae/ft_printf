@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 01:08:18 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:24:50 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		main()
 	ft_putendl("moi = ");
 	//int a = ft_printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
 	//int a = ft_printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
-	//int a = ft_printf("%6C et coco %C titi %C tyty", 3250, 0xd800, 'u');
+	//int a = ft_printf("%9.6ls %S", s, (wchar_t *)'a');
 	//ft_putchar('|');
 	//int a;	
 	//int a = ft_printf("%C", 0xdb02);
@@ -56,33 +56,72 @@ int		main()
 	/*
 	**	Cas indefinis faux sur Moulitest
 	*/
-	//int a = ft_printf("%.0p, %.p", 0, 0);
-	//int a = ft_printf("{%03c}", 0);
+
+
+	//int a = ft_printf("%");
+	//int a = ft_printf("%llx, %llx", 0, ULLONG_MAX);
 	//int a = ft_printf("%hD, %hD", 0, USHRT_MAX);
-	//int a = ft_printf("{%-15Z}", 123);
 	//int a = ft_printf("%hhO, %hhO", 0, USHRT_MAX);
+	//int a = ft_printf("{%-15p}", 0);
+	//int a = ft_printf("{%03c}", 0);
+	//int a = ft_printf("{%-15Z}", 123);
+	//int a = ft_printf("%+o", 0);
+	//int a = ft_printf("{% C}", 0);
+	//int a = ft_printf("%4.1S", L"Jambon");
+	//int a = ft_printf("%.0p, %.p", 0, 0);
+	//int a = ft_printf("%.p, %.0p", 0, 0);
 	//int a = ft_printf("% o|%+o", 42, 42);
 	//int a = ft_printf("{%*3d}", 0, 0);
-	//int a = ft_printf("%4.1S", L"Jambon");
-	int a = ft_printf("%15.4d", -42);
 	//int a = ft_printf("{%f}{%F}", 1.42, 1.42);
-	ft_putendl("");
+	
+
+	/*
+	**
+	*/
+	
 	//int b = printf("vrai = %-8d %C premiere phrase %d entre les deux %C normalement ca a foire avant\n", 125, 3250, 125, 0x11ffff);
+	ft_putendl("");
 	ft_putendl("vrai = ");
-	//int b = printf("%8C et coco %C titi %lc", 3250, 0x11ffff, 'a');
-	//int b = printf("%6C et coco %C titi %C tyty", 3250, 0xd800, 'u');
+	//int b = printf("%9.6ls %S", s, (wchar_t *)'a');
+	//int b = printf();
 	//int b = printf("yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a');
 	//ft_putchar('|');
 	
-	int b = 0;
+	//int b = 0;
 	//int b = printf("%S", s);
 	//b = printf("%hD, %hD", 0, USHRT_MAX);
 	//b = printf("% o|%+o", 42, 42);
 	//b = printf("{%f}{%F}", 1.42, 1.42);
-	b = printf("%15.4d", -42);
+	//b = printf("%15.4d", -42);
 	//int b = printf("%.0p, %.p", 0, 0);
 	//int b = printf("%C", 0xdb02);
 	//printf("test : #-18x\n");	
+
+	/*
+	**	Cas indefinis faux sur Moulitest
+	*/
+
+	int b = 0;
+
+	//b = printf("%llx, %llx", 0, ULLONG_MAX);
+	//b = printf("%.0p, %.p", 0, 0);
+	//b = printf("{%03c}", 0);
+//	b = printf("%hD, %hD", 0, USHRT_MAX);
+	//b = printf("{%-15Z}", 123);
+	//int b = printf("%hhO, %hhO", 0, USHRT_MAX);
+	//int b = printf("{%-15p}", 0);
+	//b = printf("{% C}", 0);
+	//int b = printf("% o|%+o", 42, 42);
+	//int b = printf("{%*3d}", 0, 0);
+	//b = printf("%4.1S", L"Jambon");
+	//int b = printf("%15.4d", -42);
+	//int b = printf("{%f}{%F}", 1.42, 1.42);
+	
+
+	/*
+	**
+	*/
+
 
 	printf("\nretour moi = %d\n", a);
 	printf("retour vrai = %d\n", b);
