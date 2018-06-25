@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 17:43:06 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 20:25:44 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int								print_string(t_env *env);
 int								print_big_string(t_env *env);
 int								print_address(t_env *env);
 int								print_number(t_env *env);
-int					print_unsigned_number(t_env *env);
+int								print_unsigned_number(t_env *env);
 int					print_octal(t_env *env);
 int					print_hexa(t_env *env);
 

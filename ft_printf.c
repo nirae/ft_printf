@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 18:43:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 20:04:45 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int		ft_printf(const char *str, ...)
 	env.len = 0;
 	env.buff.len = 0;
 	env.buff.pos_last_conv = 0;
+	env.types.i = 0;
 	while (string[env.pos] != 0)
 	{
 		if (string[env.pos] != '%')
@@ -145,5 +146,8 @@ int		ft_printf(const char *str, ...)
 	}
 	va_end(env.va);
 	print_buffer(&env.buff);
+//	if (env.types.i != 0)
+//		ft_putendl("pas eu de malloc");
+//		//ft_strdel(&env.types.str);
 	return (env.len);
 }

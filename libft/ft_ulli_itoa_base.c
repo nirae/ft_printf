@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:14:51 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 18:51:08 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 20:06:16 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char		*ft_ulli_itoa_base(unsigned long long int n, char *base_str)
 
 	base = ft_strlen(base_str);
 	len = ft_count(n, base);
-	if (!(result = ft_strnew(len)))
+	if (!(result = ft_strnew(len + 1)))
 		return (NULL);
 	result[0] = '0';
 	while (n != 0)
