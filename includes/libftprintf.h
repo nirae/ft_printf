@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 20:38:58 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 17:43:06 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define BUFFER_SIZE	4096
 
 # define FAIL			-666
+# define MALLOC_FAIL	-999
 
 /*
 **		H =	4

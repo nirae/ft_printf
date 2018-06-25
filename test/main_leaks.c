@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:44:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 00:39:10 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:34:18 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int main(void)
 	ft_getleaks("zd");
 	//ft_printf("%\n");
 	//ft_getleaks("%");
-	//ft_printf("%U\n", 4294967295);
-	//ft_getleaks("U");
-	//ft_printf("%u\n", 4294967295);
-	//ft_getleaks("u");
+	ft_printf("%U\n", 4294967295);
+	ft_getleaks("U");
+	ft_printf("%u\n", 4294967295);
+	ft_getleaks("u");
 	//ft_printf("%o\n", 40);
 	//ft_getleaks("o");
 	//ft_printf("%%#08x\n", 42);

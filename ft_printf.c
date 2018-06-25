@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 09:38:44 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 01:24:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:43:17 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int		parser(char *str, t_env *env)
 
 int		printer(t_env *env)
 {
+	int		retour;
+
+	retour = 1;
 	if ((env->flags.type == 'c' && env->flags.size == L) ||env->flags.type == 'C')
 		print_big_char(env);
 	else if ((env->flags.type == 's' && env->flags.size == L) ||env->flags.type == 'S')
@@ -84,15 +87,17 @@ int		printer(t_env *env)
 	else if (env->flags.type == 'p')
 		print_address(env);
 	else if (env->flags.type == 'd' || env->flags.type == 'i' || env->flags.type == 'D')
-		print_number(env);
+		retour = print_number(env);
 	else if (env->flags.type == 'u' || env->flags.type == 'U')
-		print_unsigned_number(env);
+		retour = print_unsigned_number(env);
 	else if (env->flags.type == 'o' || env->flags.type == 'O')
 		print_octal(env);
 	else if (env->flags.type == 'x' || env->flags.type == 'X')
 		print_hexa(env);
 	else
 		return (FALSE);
+	if (!retour)
+		return (MALLOC_FAIL);
 	if (env->len == -1)
 	{
 		delete_end_of_buffer(&env->buff, env->buff.pos_last_conv);
@@ -108,6 +113,7 @@ int		ft_printf(const char *str, ...)
 {
 	t_env		env;
 	char		*string;
+	int			ret_printer;
 
 	va_start(env.va, str);
 	string = (char *)str;
@@ -131,8 +137,11 @@ int		ft_printf(const char *str, ...)
 		}
 		// DEBUG
 	//	print_tflags(&env);
-		if (printer(&env) == FAIL)
+		ret_printer = printer(&env);
+		if (ret_printer == FAIL)
 			return (-1);
+		else if (ret_printer == MALLOC_FAIL)
+			return (MALLOC_FAIL);
 	}
 	va_end(env.va);
 	print_buffer(&env.buff);

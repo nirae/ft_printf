@@ -6,12 +6,11 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 22:17:55 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 01:17:08 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 17:47:54 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 static int		print_width(t_env *env, int len, char c)
 {
@@ -50,7 +49,7 @@ static int		print_string_with_precision(t_env *env, int len)
 	if (env->types.str[0] == '-')
 	{
 		env->len += putchar_in_buffer(&env->buff, '-');
-		env->types.str = &env->types.str[1];
+		ft_strcpy(env->types.str, &env->types.str[1]);
 		i++;
 	}
 	if (env->flags.precision > len)
@@ -68,7 +67,7 @@ static int		print_string_with_precision(t_env *env, int len)
 static int		get_number(t_env *env)
 {
 	if (env->flags.size == H)
-		env->types.str = 
+		env->types.str =
 			ft_lli_itoa_base((short)va_arg(env->va, int), "0123456789");
 	else if (env->flags.size == HH)
 		env->types.str =
@@ -95,18 +94,12 @@ static int		get_number(t_env *env)
 
 static void		padding_right(t_env *env, int len)
 {
-	//char		*tmp;
-
 	if (env->flags.zero && env->flags.precision <= len)
 	{
 		if (env->types.str[0] == '-')
 		{
 			env->len += putchar_in_buffer(&env->buff, '-');
-			//tmp = &env->types.str[1];
-			//ft_strdel(&env->types.str);
-			//env->types.str = tmp;
-			//ft_strdel(&tmp);
-			env->types.str = &env->types.str[1];
+			ft_strcpy(env->types.str, &env->types.str[1]);
 			env->flags.sign = 0;
 		}
 		else if (env->flags.sign)
@@ -129,9 +122,8 @@ int				print_number(t_env *env)
 {
 	int					len;
 
-	// GERER ERREUR MALLOC
 	if (!(get_number(env)))
-		return (FAIL);
+		return (MALLOC_FAIL);
 	len = ft_strlen(env->types.str);
 	if (env->flags.width < 0)
 	{
@@ -148,5 +140,6 @@ int				print_number(t_env *env)
 	print_string_with_precision(env, len);
 	if (env->flags.align == LEFT)
 		print_width(env, len, ' ');
+	ft_strdel(&env->types.str);
 	return (TRUE);
 }

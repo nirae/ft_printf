@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 10:24:46 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 00:55:58 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/25 19:02:38 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int		main()
 	//printf("retour vrai = %d\n", b);
 	//ft_printf("vrai : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
 	//ft_printf("moii : u%4.2ss %-1.s\n %---5.3s", "coco", NULL, "yooo");
-	ft_printf("%d", 3250);
+	ft_printf("%05.2u", 0);
 	//ft_getleaks("fin du main");
 	return (0);
 }
