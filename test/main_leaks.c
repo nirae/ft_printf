@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/24 19:44:41 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 18:34:18 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/27 00:22:36 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void 	ft_getleaks(char *str)
 {
-	system("leaks printf -fullContent");
+	system("leaks my_test_printf");
 	printf("%s\n", str);
 	getchar();
 }
@@ -24,8 +24,8 @@ int main(void)
 {
 	ft_printf("\n");
 	ft_getleaks("sans conversion");
-	//ft_printf("%%\n");
-	//ft_getleaks("2 pourcent");
+	ft_printf("%%\n");
+	ft_getleaks("2 pourcent");
 	ft_printf("%d\n", 42);
 	ft_getleaks("d");
 	ft_printf("%d%d\n", 42, 41);
@@ -36,10 +36,10 @@ int main(void)
 	ft_getleaks("ld");
 	ft_printf("%lld\n", 9223372036854775807);
 	ft_getleaks("lld");
-	//ft_printf("%x\n", 505);
-	//ft_getleaks("x");
-	//ft_printf("%X\n", 505);
-	//ft_getleaks("X");
+	ft_printf("%x\n", 505);
+	ft_getleaks("x");
+	ft_printf("%X\n", 505);
+	ft_getleaks("X");
 	ft_printf("%p\n", &ft_printf);
 	ft_getleaks("p");
 	ft_printf("%20.15d\n", 54321);
@@ -58,20 +58,20 @@ int main(void)
 	ft_getleaks("jd");
 	ft_printf("%zd\n", 4294967295);
 	ft_getleaks("zd");
-	//ft_printf("%\n");
-	//ft_getleaks("%");
+	ft_printf("%\n");
+	ft_getleaks("%");
 	ft_printf("%U\n", 4294967295);
 	ft_getleaks("U");
 	ft_printf("%u\n", 4294967295);
 	ft_getleaks("u");
-	//ft_printf("%o\n", 40);
-	//ft_getleaks("o");
-	//ft_printf("%%#08x\n", 42);
-	//ft_getleaks("2 pourcent #08x");
-	//ft_printf("%x\n", 1000);
-	//ft_getleaks("x");
-	//ft_printf("%#X\n", 1000);
-	//ft_getleaks("#X");
+	ft_printf("%o\n", 40);
+	ft_getleaks("o");
+	ft_printf("%%#08x\n", 42);
+	ft_getleaks("2 pourcent #08x");
+	ft_printf("%x\n", 1000);
+	ft_getleaks("x");
+	ft_printf("%#X\n", 1000);
+	ft_getleaks("#X");
 	ft_printf("%s\n", NULL);
 	ft_getleaks("s");
 	ft_printf("%S\n", L"ݗݜशব");

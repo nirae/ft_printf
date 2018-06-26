@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 20:25:44 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/27 00:27:10 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct					s_env
 ** Parsing (parser/...)
 */
 
+int								parser(char *str, t_env *env);
 int								is_valid_flags(char c);
 int								is_valid_sizeflag(char c);
 int								is_valid_type(char c);
@@ -125,15 +126,25 @@ int								set_precision(char *str, t_env *env);
 ** Printing (printer/...)
 */
 
+int								printer(t_env *env);
 int								print_char(t_env *env);
 int								print_big_char(t_env *env);
 int								print_string(t_env *env);
 int								print_big_string(t_env *env);
 int								print_address(t_env *env);
+int								print_percent(t_env *env);
 int								print_number(t_env *env);
 int								print_unsigned_number(t_env *env);
-int					print_octal(t_env *env);
-int					print_hexa(t_env *env);
+int								print_octal(t_env *env);
+int								print_hexa(t_env *env);
+
+/*
+**	Tools for hexa printer (printer/hexa_tools.c)
+*/
+
+int								print_width_right_hexa(t_env *env, int len, char c);
+int								print_width_left_hexa(t_env *env, int len, char c);
+void							print_prefix(t_env *env);
 
 /*
 **	Tools for unicode (printer/unicode_tools/..)
@@ -148,10 +159,10 @@ int								ft_bigstrlen(wchar_t *str);
 ** Buffer (buffer/buffer.c)
 */
 
-int					putstr_in_buffer(t_buffer *buff, char *str);
-int					putchar_in_buffer(t_buffer *buff, char c);
-void				print_buffer(t_buffer *buff);
-void				delete_end_of_buffer(t_buffer *buff, int start);
+int								putstr_in_buffer(t_buffer *buff, char *str);
+int								putchar_in_buffer(t_buffer *buff, char c);
+void							print_buffer(t_buffer *buff);
+void							delete_end_of_buffer(t_buffer *buff, int start);
 
 /*
 **	THE FT_PRINTF !!!

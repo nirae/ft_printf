@@ -6,7 +6,7 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 15:34:01 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 20:25:47 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/26 15:23:35 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		print_width(t_env *env, int len, char c)
 
 	i = -1;
 	if (env->flags.width <= 0)
-		return (0);
+		return (FALSE);
 	if (env->flags.precision > len)
 		len = len + (env->flags.precision - len);
 	limit = env->flags.width - len;

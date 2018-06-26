@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 19:54:58 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 20:21:47 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/26 22:20:54 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int				print_address(t_env *env)
 	i = -1;
 	env->types.ulli = (long long int)va_arg(env->va, void *);
 	env->types.str = ft_lli_itoa_base(env->types.ulli, "0123456789abcdef");
+	if (env->types.str == NULL)
+		return (FALSE);
 	len = ft_strlen(env->types.str) + 2;
 	if (env->flags.width > 0)
 	{
