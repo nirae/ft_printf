@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   is_valid_type.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 14:09:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 14:58:49 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/02/12 08:09:38 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/26 22:18:26 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_bzero(void *s, size_t n)
+int		is_valid_type(char c)
 {
-	unsigned int	i;
-	char			*str;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
+	if (c == 's' || c == 'd' || c == 'i' || c == 'c' || c == 'p' ||
+		c == 'o' || c == '%' || c == 'D' || c == 'C' ||
+		c == 'S' || c == 'O' || c == 'u' || c == 'U' || c == 'x' ||
+		c == 'X' || c == 'b' || c == 'B')
+		return (TRUE);
+	return (FALSE);
 }

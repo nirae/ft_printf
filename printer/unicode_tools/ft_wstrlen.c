@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 14:09:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 14:58:49 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/06/24 19:26:52 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/24 19:28:45 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_bzero(void *s, size_t n)
+int		ft_wstrlen(wchar_t *str)
 {
-	unsigned int	i;
-	char			*str;
+	int		i;
+	int		len;
 
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
+	i = -1;
+	len = 0;
+	while (str[++i] != 0)
+		len++;
+	return (len);
 }

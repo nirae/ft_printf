@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 14:09:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 14:58:49 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/06/26 23:25:48 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/26 23:26:08 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_bzero(void *s, size_t n)
+int		parser(char *str, t_env *env)
 {
-	unsigned int	i;
-	char			*str;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
+	init_flags(env);
+	set_flags(str, env);
+	set_width(str, env);
+	set_precision(str, env);
+	set_size(str, env);
+	if (!set_type(str, env))
+		return (FALSE);
+	return (TRUE);
 }

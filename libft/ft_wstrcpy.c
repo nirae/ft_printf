@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_wstrcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 14:09:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 14:58:49 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/06/24 00:22:06 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/24 00:25:23 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+wchar_t		*ft_wstrcpy(wchar_t *dst, const char *src)
 {
-	unsigned int	i;
-	char			*str;
+	int i;
 
-	str = (char *)s;
 	i = 0;
-	while (i < n)
+	while (src[i] != '\0')
 	{
-		str[i] = '\0';
+		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = '\0';
+	return (dst);
 }

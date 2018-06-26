@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 10:26:48 by ndubouil          #+#    #+#              #
-#    Updated: 2018/01/11 14:40:44 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/06/27 00:22:08 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ HEADER	=	.
 MAIN	=	main.c
 OBJ		=	$(patsubst %.c,%.o,$(SRC))
 # Name
-NAME	=	printf
+NAME	=	my_test_printf
 
 .PHONY: all clean fclean re
 
@@ -34,6 +34,13 @@ $(NAME):	$(OBJ) $(MAIN) $(LIB) $(PRINTFLIB) Makefile
 		@make -C $(PRINTFLIB)
 		@echo "Building $(NAME) ..."
 		@$(CC) $(CFLAGS) $(MAIN) $(OBJ) -L$(PRINTFLIB) -lftprintf -o $(NAME)
+		@echo "OK"
+
+leaks:		$(OBJ) main_leaks.c $(LIB) $(PRINTFLIB) Makefile
+		@echo "Compiling libftprintf ..."
+		@make -C $(PRINTFLIB)
+		@echo "Building $(NAME) ..."
+		@$(CC) $(CFLAGS) main_leaks.c $(OBJ) -L$(PRINTFLIB) -lftprintf -o $(NAME)
 		@echo "OK"
 
 %.o: 		%.c

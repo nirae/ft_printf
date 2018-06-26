@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_ulli_itoa_base.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 14:09:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 14:58:49 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/05/28 20:14:51 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/06/25 20:06:16 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+static int	ft_count(unsigned long long int n, int base)
 {
-	unsigned int	i;
-	char			*str;
+	int		i;
 
-	str = (char *)s;
 	i = 0;
-	while (i < n)
+	while (n != 0)
 	{
-		str[i] = '\0';
+		n = n / base;
 		i++;
 	}
+	return (i);
+}
+
+char		*ft_ulli_itoa_base(unsigned long long int n, char *base_str)
+{
+	int		len;
+	int		base;
+	char	*result;
+
+	base = ft_strlen(base_str);
+	len = ft_count(n, base);
+	if (!(result = ft_strnew(len + 1)))
+		return (NULL);
+	result[0] = '0';
+	while (n != 0)
+	{
+		result[--len] = base_str[n % base];
+		n = n / base;
+	}
+	return (result);
 }
