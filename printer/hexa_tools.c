@@ -6,13 +6,13 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 21:21:19 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/26 21:35:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/28 10:32:39 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void		print_prefix(t_env *env)
+void			print_prefix(t_env *env)
 {
 	if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 ||
 			env->flags.precision > 1))
@@ -22,7 +22,7 @@ void		print_prefix(t_env *env)
 		else
 			env->len += putstr_in_buffer(&env->buff, "0x");
 		env->flags.hash = 0;
-		env->flags.width-= 2;
+		env->flags.width -= 2;
 	}
 }
 
@@ -41,7 +41,7 @@ static int		calc_limit(t_env *env, int len)
 	return (limit);
 }
 
-int		print_width_right_hexa(t_env *env, int len, char c)
+int				print_width_right_hexa(t_env *env, int len, char c)
 {
 	int				i;
 	int				limit;
@@ -66,7 +66,7 @@ int		print_width_right_hexa(t_env *env, int len, char c)
 	return (TRUE);
 }
 
-int		print_width_left_hexa(t_env *env, int len, char c)
+int				print_width_left_hexa(t_env *env, int len, char c)
 {
 	int				i;
 	int				limit;

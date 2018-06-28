@@ -6,10 +6,9 @@
 /*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:36:53 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/26 18:24:27 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/28 10:40:16 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libftprintf.h"
 
@@ -43,11 +42,13 @@ static int		print_width(t_env *env, int len, char c)
 static int		print_string_with_precision(t_env *env, int len)
 {
 	int				i;
-	
+
 	i = (env->flags.precision - (len + env->flags.hash));
-	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0 && env->flags.hash == 0)
+	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0
+			&& env->flags.hash == 0)
 		return (TRUE);
-	if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 || env->flags.precision > 1))
+	if (env->flags.hash && (ft_strcmp("0", env->types.str) != 0 ||
+			env->flags.precision > 1))
 		env->len += putchar_in_buffer(&env->buff, '0');
 	if (env->flags.precision > len + env->flags.hash)
 	{
@@ -108,7 +109,7 @@ static void		padding_right(t_env *env, int len)
 **	Printer for flag "o"
 */
 
-int		print_octal(t_env *env)
+int				print_octal(t_env *env)
 {
 	int					len;
 
