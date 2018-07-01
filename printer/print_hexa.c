@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 00:39:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/26 21:51:47 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/28 10:34:53 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int		print_string_with_precision(t_env *env, int len)
 {
 	int				i;
-	
+
 	i = (env->flags.precision - len);
 	if ((ft_strcmp(env->types.str, "0") == 0) && env->flags.precision == 0)
 		return (TRUE);
@@ -43,7 +43,7 @@ static void		get_str(t_env *env, char ref[16])
 			va_arg(env->va, int), ref);
 	else if (env->flags.size == L)
 		env->types.str = ft_ulli_itoa_base(
-			va_arg(env->va, unsigned long int),ref);
+			va_arg(env->va, unsigned long int), ref);
 	else if (env->flags.size == LL)
 		env->types.str = ft_ulli_itoa_base(
 			va_arg(env->va, unsigned long long int), ref);
@@ -89,12 +89,12 @@ static void		padding_right(t_env *env, int len)
 **	Printer for flag "x"
 */
 
-int		print_hexa(t_env *env)
+int				print_hexa(t_env *env)
 {
 	int					len;
 
 	if (!(get_number(env)))
-	 	return (MALLOC_FAIL);
+		return (MALLOC_FAIL);
 	len = ft_strlen(env->types.str);
 	if (env->flags.align == RIGHT)
 		padding_right(env, len);

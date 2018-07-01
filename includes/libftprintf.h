@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:08:59 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/07/01 14:48:28 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/07/01 16:19:19 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef union					u_types
 	int							i;
 	long int					li;
 	long long int				lli;
-	unsigned long long int 		ulli;
+	unsigned long long int		ulli;
 	short int					si;
 }								t_types;
 
@@ -143,8 +143,10 @@ int								print_hexa(t_env *env);
 **	Tools for hexa printer (printer/hexa_tools.c)
 */
 
-int								print_width_right_hexa(t_env *env, int len, char c);
-int								print_width_left_hexa(t_env *env, int len, char c);
+int								print_width_right_hexa(t_env *env, int len,
+									char c);
+int								print_width_left_hexa(t_env *env, int len,
+									char c);
 void							print_prefix(t_env *env);
 
 /*
@@ -169,6 +171,6 @@ void							delete_end_of_buffer(t_buffer *buff, int start);
 **	THE FT_PRINTF !!!
 */
 
-int					ft_printf(const char *str, ...);
+int								ft_printf(const char *str, ...);
 
 #endif

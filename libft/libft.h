@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 09:31:05 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/24 18:52:50 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/06/28 10:45:28 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int					ft_sqrt(int n);
 t_list				*ft_lsti(t_list *lst, int i);
 char				*ft_itoa_base(int n, int base);
 char				*ft_lli_itoa_base(long long int n, char *base_str);
-char				*ft_ulli_itoa_base(unsigned long long int n, char *base_str);
+char				*ft_ulli_itoa_base(unsigned long long int n,
+						char *base_str);
 
 #endif
