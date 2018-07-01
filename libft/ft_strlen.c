@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:46:22 by ndubouil          #+#    #+#             */
-/*   Updated: 2017/11/22 15:41:35 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/07/01 16:12:08 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t		ft_strlen(const char *s)
 	size_t i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s && s[i])
 		i++;
 	return (i);
 }

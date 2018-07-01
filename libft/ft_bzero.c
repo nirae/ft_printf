@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 14:09:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/19 14:58:49 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/07/01 16:02:07 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-	char			*str;
+	unsigned char	*str;
 
-	str = (char *)s;
-	i = 0;
-	while (i < n)
+	str = s;
+	while (n)
 	{
-		str[i] = '\0';
-		i++;
+		*str++ = '\0';
+		n--;
 	}
 }
